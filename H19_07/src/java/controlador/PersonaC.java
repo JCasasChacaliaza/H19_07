@@ -33,6 +33,7 @@ public class PersonaC implements Serializable {
         try {
             persona = new Persona();
         } catch (Exception e) {
+            throw e;
         }
 
     }
@@ -50,7 +51,6 @@ public class PersonaC implements Serializable {
     public void registrar() throws Exception {
         try {
             dao.registrar(persona);
-
             limpiar();
             listado();
             FacesContext.getCurrentInstance().addMessage(null,
@@ -64,8 +64,8 @@ public class PersonaC implements Serializable {
     public void modificar() throws Exception {
         try {
             dao.modificar(persona);
-            listado();
             limpiar();
+            listado();
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Modificado", "Completado"));
         } catch (Exception e) {
@@ -78,12 +78,10 @@ public class PersonaC implements Serializable {
         try {
             dao.eliminar(persona);
             listado();
-            limpiar();
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Eliminado", "Completado"));
         } catch (Exception e) {
             throw e;
-
         }
     }
 

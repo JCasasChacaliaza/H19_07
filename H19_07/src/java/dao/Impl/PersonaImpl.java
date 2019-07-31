@@ -37,7 +37,8 @@ public class PersonaImpl extends Conexion implements ICRUD<Persona> {
     @Override
     public void modificar(Persona modelo) throws Exception {
         try {
-            String sql = "UPDATE MAESTRA.PERSONA SET NOMPER =?, APEPER=?, DNIPER=?, SEXPER=?, CELPER=?, TIPPER=?, USUPER=?, PASSPER =? WHERE IDPER?";
+            Conexion();
+            String sql = "UPDATE MAESTRA.PERSONA SET NOMPER =?, APEPER=?, DNIPER=?, SEXPER=?, CELPER=?, TIPPER=?, USUPER=?, PASSPER =? WHERE IDPER=?";
             PreparedStatement ps = getConectar().prepareStatement(sql);
             ps.setString(1, modelo.getNomPer());
             ps.setString(2, modelo.getApePer());
@@ -60,10 +61,12 @@ public class PersonaImpl extends Conexion implements ICRUD<Persona> {
     @Override
     public void eliminar(Persona modelo) throws Exception {
         try {
+            Conexion();
             String sql = "UPDATE MAESTRA.PERSONA SET ESTPER='I' WHERE IDPER=?";
             PreparedStatement ps = getConectar().prepareStatement(sql);
             ps.setString(1, modelo.getIdPer());
             ps.executeUpdate();
+            ps.close();
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -77,9 +80,9 @@ public class PersonaImpl extends Conexion implements ICRUD<Persona> {
         ResultSet rs;
         try {
             this.Conexion();
-            String sql = "select* from maestra.persona WHERE ESTPER='A'";
-            lisPer = new ArrayList();
+            String sql = "select * from maestra.persona WHERE ESTPER='A'";            
             PreparedStatement ps = this.getConectar().prepareCall(sql);           
+            lisPer = new ArrayList();
             rs = ps.executeQuery();
             while (rs.next()) {
                 Persona pers = new Persona();
@@ -92,6 +95,7 @@ public class PersonaImpl extends Conexion implements ICRUD<Persona> {
                 pers.setPasPer(rs.getString("PASSPER"));
                 pers.setUsuPer(rs.getString("USUPER"));
                 pers.setTipPer(rs.getString("TIPPER"));
+                pers.setEstPer(rs.getString("ESTPER"));
                 lisPer.add(pers);
             }
         } catch (SQLException e) {

@@ -47,16 +47,16 @@
         </center> 
         <br/>
         <h:form id="form">
-            <p:dataTable value="#{personaC.listado()}" 
+            <p:dataTable value="#{personaC.lisper}" 
                          id="dtTable" var="lista" 
                          selection="#{personaC.persona}"
-                         rowKey="#{lista.idPer}" 
+                         rowKey="#{lista.idPer}"  paginator="true"
                          selectionMode="single" rows="15" style="border-bottom: 25px">
 
                 <p:column headerText="Nombre">
                     <p:outputLabel value="#{lista.nomPer}"/>
                 </p:column>
-                                               
+
                 <p:column headerText="Apellido">
                     <p:outputLabel value="#{lista.apePer}"/>
                 </p:column>
@@ -71,7 +71,7 @@
 
                 <p:column headerText="Contraseña">
                     <p:outputLabel value="#{lista.pasPer}"/>
-                    
+
                 </p:column>
 
                 <p:column headerText="Usuario">
@@ -89,13 +89,14 @@
                     <p:outputLabel value="#{lista.tipPer eq 'J' ? 'Jefe de Sucursal' : ''}" />
                     <p:outputLabel value="#{lista.tipPer eq 'V' ? 'Vendedor' : ''}" />
                 </p:column>
-
-
+                
+               
             </p:dataTable>
+            
             <p:contextMenu for="dtTable">
-                <p:menuitem value="Modificar" update=" :dlgDatos" oncomplete="PF('wdlgDatos').show();"/>
-                <p:menuitem value="Eliminar" update=" :form" oncomplete="#{personaC.eliminado()}"/>                
-            </p:contextMenu>                                                            
+                <p:menuitem value="Modificar" update=":dlgDatos" oncomplete="PF('wdlgDatos').show();"/>
+                <p:menuitem value="Eliminar" update="dtTable"  actionListener="#{personaC.eliminado()}"/>                
+            </p:contextMenu>  
         </h:form>
 
         <p:dialog id="dlgDatos" widgetVar="wdlgDatos">
@@ -126,8 +127,8 @@
                         <f:selectItem itemLabel="Femenino" itemValue="F"/>                                                                                  
                     </p:selectOneRadio>
                 </h:panelGrid>     
-                <p:commandButton value="Modificar" actionListener="#{personaC.modificar()}" oncomplete="PF('wdlgDatos').hide(); " />
-                <p:commandButton value="Cancelar" update=":form" oncomplete="PF('wdlgDatos').hide(); " />
+                <p:commandButton value="Modificar" actionListener="#{personaC.modificar()}" update=":form" oncomplete="PF('wdlgDatos').hide(); " />
+                <p:commandButton value="Cancelar" immediate="true" oncomplete="PF('wdlgDatos').hide();" />
 
             </h:form>
 
