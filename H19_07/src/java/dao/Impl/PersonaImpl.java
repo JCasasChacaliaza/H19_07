@@ -14,7 +14,7 @@ public class PersonaImpl extends Conexion implements ICRUD<Persona> {
     @Override
     public void registrar(Persona modelo) throws Exception {
         try {
-            String sql = "insert into MAESTRA.PERSONA (NOMPER, APEPER, DNIPER, SEXPER, CELPER, TIPPER, USUPER, PASSPER, ESTPER) "
+            String sql = "insert into PERSONA (NOMPER, APEPER, DNIPER, SEXPER, CELPER, TIPPER, USUPER, PASSPER, ESTPER) "
                     + "VALUES (?,?,?,?,?,?,?,?,'A')";
             PreparedStatement ps = getConectar().prepareStatement(sql);
             ps.setString(1, modelo.getNomPer());
@@ -38,7 +38,7 @@ public class PersonaImpl extends Conexion implements ICRUD<Persona> {
     public void modificar(Persona modelo) throws Exception {
         try {
             Conexion();
-            String sql = "UPDATE MAESTRA.PERSONA SET NOMPER =?, APEPER=?, DNIPER=?, SEXPER=?, CELPER=?, TIPPER=?, USUPER=?, PASSPER =? WHERE IDPER=?";
+            String sql = "UPDATE PERSONA SET NOMPER =?, APEPER=?, DNIPER=?, SEXPER=?, CELPER=?, TIPPER=?, USUPER=?, PASSPER =? WHERE IDPER=?";
             PreparedStatement ps = getConectar().prepareStatement(sql);
             ps.setString(1, modelo.getNomPer());
             ps.setString(2, modelo.getApePer());
@@ -62,7 +62,7 @@ public class PersonaImpl extends Conexion implements ICRUD<Persona> {
     public void eliminar(Persona modelo) throws Exception {
         try {
             Conexion();
-            String sql = "UPDATE MAESTRA.PERSONA SET ESTPER='I' WHERE IDPER=?";
+            String sql = "UPDATE PERSONA SET ESTPER='I' WHERE IDPER=?";
             PreparedStatement ps = getConectar().prepareStatement(sql);
             ps.setString(1, modelo.getIdPer());
             ps.executeUpdate();
@@ -80,7 +80,7 @@ public class PersonaImpl extends Conexion implements ICRUD<Persona> {
         ResultSet rs;
         try {
             this.Conexion();
-            String sql = "select * from maestra.persona WHERE ESTPER='A'";            
+            String sql = "select * from persona WHERE ESTPER='A'";            
             PreparedStatement ps = this.getConectar().prepareCall(sql);           
             lisPer = new ArrayList();
             rs = ps.executeQuery();

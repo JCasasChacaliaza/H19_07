@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Productos</title>
+
+    </h:head>
+    <h:body>
+        <center><h1>Registro de Productos</h1>
+            <h:form id="formIns">
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="Nombre Producto" />
+                    <p:inputText value="#{productoC.productos.nomProc}"  maxlength="50" required="true" requiredMessage="Ingresa el nombre del Producto" />
+
+                    <p:outputLabel value="Precio Producto"/>
+                    <p:inputText value="#{productoC.productos.preProc}" required="true" requiredMessage="Ingresa el Precio" />
+
+                    <p:outputLabel value="Categoria"/>
+                    <p:inputText value="#{productoC.productos.catProc}" required="true" requiredMessage="Ingresa el Precio" />
+
+                    <p:outputLabel value="Cantidad"/>
+                    <p:inputText value="#{productoC.productos.cantProc}" required="true" requiredMessage="Ingresa el Precio" />
+
+                    <p:outputLabel value="Fecha de ingreso"/>
+                    <p:inputText value="#{productoC.productos.fechIngProc}" required="true" requiredMessage="Ingresa el Precio" />
+
+                </h:panelGrid>
+                <p:commandButton value="registrar" actionListener="#{productoC.ingresar()}"/>
+            </h:form>                       
+        </center>
+        
+        <h:form id="form" >
+            <p:dataTable value="#{productoC.lisProduc}" id="dtTable" 
+                         var="lista" selection="#{productoC.productos}" 
+                         rowKey="#{lista.idProc}"
+                         paginator="true" selectionMode="single">
+                
+                <p:column headerText="Nombre del Producto" >
+                    <h:outputLabel value="#{lista.nomProc}"/>
+                </p:column>
+                
+                <p:column headerText="Precio del Producto" >
+                    <h:outputLabel value="#{lista.preProc}"/>
+                </p:column>
+                
+                <p:column headerText="Categoria" >
+                    <h:outputLabel value="#{lista.catProc}"/>
+                </p:column>
+                
+                <p:column headerText="Cantidad ingresada" >
+                    <h:outputLabel value="#{lista.cantProc}"/>
+                </p:column>
+                <p:column headerText="Fecha de ingreso" >
+                    <h:outputLabel value="#{lista.fechIngProc}"/>
+                </p:column>                                                               
+            </p:dataTable> 
+            
+            
+            
+            
+        </h:form>
+    </h:body>
+</html>
