@@ -23,7 +23,7 @@ public class ProductoC implements Serializable {
     @PostConstruct
     public void init() {
         try {
-
+            listar();
         } catch (Exception e) {
             System.out.println("Error : " + e);
         }
@@ -40,8 +40,8 @@ public class ProductoC implements Serializable {
             dao.registrar(productos);
             limpiar();
             listar();
-            FacesContext.getCurrentInstance().addMessage(null, 
-                   new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado Correcto", ":v"));
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado Correcto", ""));
         } catch (Exception e) {
             throw e;
         }
@@ -52,8 +52,8 @@ public class ProductoC implements Serializable {
             dao.eliminar(productos);
             limpiar();
             listar();
-            FacesContext.getCurrentInstance().addMessage(null, 
-                   new FacesMessage(FacesMessage.SEVERITY_INFO, "Eliminado Correcto", ":v"));
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Eliminado Correcto", ""));
         } catch (Exception e) {
             throw e;
         }
@@ -64,8 +64,8 @@ public class ProductoC implements Serializable {
             dao.modificar(productos);
             limpiar();
             listar();
-            FacesContext.getCurrentInstance().addMessage(null, 
-                   new FacesMessage(FacesMessage.SEVERITY_INFO, "Modificado Correcto", ":v"));
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Modificado Correcto", ""));
         } catch (Exception e) {
             throw e;
         }

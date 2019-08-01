@@ -15,14 +15,13 @@ public class ProductoImpl extends Conexion implements ICRUD<Producto> {
     public void registrar(Producto modelo) throws Exception {
         try {
             Conexion();
-            String sql = "insert into producto (NOMPRO, PREPRO, CATPRO, ESTPRO, CANTPRO, FECHINGPRO)VALUES (?,?,?,'A',?,?)";
+            String sql = "insert into producto (NOMPRO, PREPRO, CATPRO,  CANTPRO, FECHINGPRO,ESTPRO) VALUES (?,?,?,?,getdate(),'A')";
             PreparedStatement ps = this.getConectar().prepareStatement(sql);
             ps.setString(1, modelo.getNomProc());
             ps.setString(2, modelo.getPreProc());
             ps.setString(3, modelo.getCatProc());
-            ps.setString(4, modelo.getCantProc());
-            ps.setString(5, modelo.getFechIngProc());
-            ps.executeQuery();
+            ps.setString(4, modelo.getCantProc());            
+            ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
             throw e;
@@ -35,15 +34,14 @@ public class ProductoImpl extends Conexion implements ICRUD<Producto> {
     public void modificar(Producto modelo) throws Exception {
         try {
             Conexion();
-            String sql = "update producto set NOMPRO=?, PREPRO=?, CATPRO=?, CANTPRO=?, FECHINGPRO=? where IDPRO=?";
+            String sql = "update producto set NOMPRO=?, PREPRO=?, CATPRO=?, CANTPRO=? where IDPRO=?";
             PreparedStatement ps = this.getConectar().prepareStatement(sql);
             ps.setString(1, modelo.getNomProc());
             ps.setString(2, modelo.getPreProc());
             ps.setString(3, modelo.getCatProc());
-            ps.setString(4, modelo.getCantProc());
-            ps.setString(5, modelo.getFechIngProc());
-            ps.setString(6, modelo.getIdProc());
-            ps.executeQuery();
+            ps.setString(4, modelo.getCantProc());            
+            ps.setString(5, modelo.getIdProc());
+            ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
             throw e;
@@ -56,10 +54,10 @@ public class ProductoImpl extends Conexion implements ICRUD<Producto> {
     public void eliminar(Producto modelo) throws Exception {
         try {
             Conexion();
-            String sql = "update producto set ESTPROC ='I' where IDPRO=?";
+            String sql = "update producto set ESTPRO='I' where IDPRO=?";
             PreparedStatement ps = this.getConectar().prepareStatement(sql);
             ps.setString(1, modelo.getIdProc());
-            ps.executeQuery();
+            ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
             throw e;
@@ -73,9 +71,10 @@ public class ProductoImpl extends Conexion implements ICRUD<Producto> {
         List<Producto> listProc;
         ResultSet rs;
         try {
-            String sql = "select  * from producto where ESTPRO = 'I'";
+            Conexion();
+            String sql = "select * from producto where ESTPRO = 'A'";
             PreparedStatement ps = getConectar().prepareCall(sql);
-            listProc = new ArrayList<>();
+            listProc = new ArrayList();
             rs = ps.executeQuery();
             while (rs.next()) {
                 Producto prod = new Producto();

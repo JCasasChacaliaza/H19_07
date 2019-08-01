@@ -19,18 +19,22 @@
                     <p:inputText value="#{personaC.persona.nomPer}" maxlength="50" required="true" requiredMessage="Ingrese el nombre"/>
                     <p:outputLabel value="Apellido"/>
                     <p:inputText value="#{personaC.persona.apePer}" maxlength="50" required="true" requiredMessage="Ingrese el apellido"/>
-                    <p:outputLabel value="DNI"/>
-                    <p:inputText value="#{personaC.persona.dniPer}" maxlength="8" required="true" requiredMessage="Ingrese el dni"/>
-                    <p:outputLabel value="Celular"/>
-                    <p:inputText value="#{personaC.persona.celPer}" maxlength="9" required="true" requiredMessage="Ingrese el dni"/>
+                    <p:outputLabel value="DNI"/>                    
+                    <p:inputText value="#{personaC.persona.dniPer}" maxlength="8" required="true" requiredMessage="Ingrese el dni">
+                        <p:keyFilter regEx="/[0-9]/"/>
+                    </p:inputText>
+
+                    <p:outputLabel value="Celular"/>                    
+                    <p:inputText value="#{personaC.persona.celPer}" maxlength="9" required="true" requiredMessage="Ingrese el dni">
+                        <p:keyFilter regEx="/[0-9]/"/>
+                    </p:inputText>
                     <p:outputLabel value="Contraseña"/>
                     <p:inputText value="#{personaC.persona.pasPer}" required="true" requiredMessage="Ingrese el dni"/>
                     <p:outputLabel value="Usuario"/>
                     <p:inputText value="#{personaC.persona.usuPer}" required="true" requiredMessage="Ingrese el dni"/>
                     <p:outputLabel value="Tipo de usuario"/>
-                    <p:selectOneMenu value="#{personaC.persona.tipPer}" rendered="true" requiredMessage="Ingresa el nivel">
-
-                        <f:selectItem itemLabel="Registra un Nivel" itemValue=""/>
+                    <p:selectOneMenu value="#{personaC.persona.tipPer}" required="true" requiredMessage="Ingresa el nivel">
+                        <f:selectItem itemLabel="Registra un Nivel" noSelectionOption="false"/>
                         <f:selectItem itemLabel="Administrador" itemValue="A"/>
                         <f:selectItem itemLabel="Jefe de Sucursal" itemValue="J"/>
                         <f:selectItem itemLabel="Vendedor" itemValue="V"/>                                                                
@@ -89,10 +93,10 @@
                     <p:outputLabel value="#{lista.tipPer eq 'J' ? 'Jefe de Sucursal' : ''}" />
                     <p:outputLabel value="#{lista.tipPer eq 'V' ? 'Vendedor' : ''}" />
                 </p:column>
-                
-               
+
+
             </p:dataTable>
-            
+
             <p:contextMenu for="dtTable">
                 <p:menuitem value="Modificar" update=":dlgDatos" oncomplete="PF('wdlgDatos').show();"/>
                 <p:menuitem value="Eliminar" update="dtTable"  actionListener="#{personaC.eliminado()}"/>                

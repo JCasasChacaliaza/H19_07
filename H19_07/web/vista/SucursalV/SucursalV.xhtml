@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <head>
+        <title>Registrar Sucursales</title>
+
+    </head>
+    <h:body>
+        <h:form id="formIns">
+            <p:panelGrid columns="2" >
+
+                <p:outputLabel value="Telefono"/>
+                <p:inputText value="#{sucursalC.sucursal.telSuc}" required="true" requiredMessage="Ingrese el Telefono"/>
+
+                <p:outputLabel value="Direción"/>
+                <p:inputText value="#{sucursalC.sucursal.dirSuc}" required="true" requiredMessage="Ingrese ladirecció"/>
+
+                <p:outputLabel value="Ubicación"/>
+                <p:inputText value="#{sucursalC.sucursal.proSuc}" required="true" requiredMessage="Ingrese la ubicación"/>
+
+            </p:panelGrid>     
+            <p:commandButton value="Registrar" actionListener="#{sucursalC.registrar()}" update="" />            
+        </h:form>  
+
+        <h:form id="form" >
+            <p:dataTable>
+                
+                
+
+
+            </p:dataTable>
+        </h:form>
+
+
+
+
+
+
+
+    </h:body>
+</html>

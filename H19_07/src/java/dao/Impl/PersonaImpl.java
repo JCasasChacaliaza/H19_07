@@ -80,8 +80,8 @@ public class PersonaImpl extends Conexion implements ICRUD<Persona> {
         ResultSet rs;
         try {
             this.Conexion();
-            String sql = "select * from persona WHERE ESTPER='A'";            
-            PreparedStatement ps = this.getConectar().prepareCall(sql);           
+            String sql = "select * from persona WHERE ESTPER='A'";
+            PreparedStatement ps = this.getConectar().prepareCall(sql);
             lisPer = new ArrayList();
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -90,7 +90,7 @@ public class PersonaImpl extends Conexion implements ICRUD<Persona> {
                 pers.setNomPer(rs.getString("NOMPER"));
                 pers.setApePer(rs.getString("APEPER"));
                 pers.setDniPer(rs.getString("DNIPER"));
-                pers.setCelPer(rs.getString("CELPER"));                
+                pers.setCelPer(rs.getString("CELPER"));
                 pers.setSexPer(rs.getString("SEXPER"));
                 pers.setPasPer(rs.getString("PASSPER"));
                 pers.setUsuPer(rs.getString("USUPER"));
