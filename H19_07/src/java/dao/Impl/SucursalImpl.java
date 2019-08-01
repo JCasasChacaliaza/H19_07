@@ -14,7 +14,8 @@ public class SucursalImpl extends Conexion implements ICRUD<Sucursal> {
     @Override
     public void registrar(Sucursal modelo) throws Exception {
         try {
-            String sql = "insert into SUCURSAL (TELSUC,DIRESUC,PROSUC,ESTSUC)VALUES(?,?,?,'A')";
+            Conexion();
+            String sql = "insert into SUCURSAL (TELSUC , DIRESUC, PROSUC ,ESTSUC ) VALUES (?,?,?,'A')";
             PreparedStatement ps = this.getConectar().prepareStatement(sql);
             ps.setString(1, modelo.getTelSuc());
             ps.setString(2, modelo.getDirSuc());
@@ -31,6 +32,7 @@ public class SucursalImpl extends Conexion implements ICRUD<Sucursal> {
     @Override
     public void modificar(Sucursal modelo) throws Exception {
         try {
+            Conexion();
             String sql = "update  SUCURSAL set TELSUC=? ,DIRESUC=?,PROSUC=? where IDSUC=? ";
             PreparedStatement ps = this.getConectar().prepareStatement(sql);
             ps.setString(1, modelo.getTelSuc());
@@ -49,6 +51,7 @@ public class SucursalImpl extends Conexion implements ICRUD<Sucursal> {
     @Override
     public void eliminar(Sucursal modelo) throws Exception {
         try {
+            Conexion();
             String sql = "update  SUCURSAL set ESTSUC='I' where IDSUC=? ";
             PreparedStatement ps = this.getConectar().prepareStatement(sql);
             ps.setString(1, modelo.getIdSuc());
@@ -66,6 +69,7 @@ public class SucursalImpl extends Conexion implements ICRUD<Sucursal> {
         List<Sucursal> lisSuc;
         ResultSet rs;
         try {
+            Conexion();
             String sql = "select * from sucursal where estsuc='A'";
             PreparedStatement ps = this.getConectar().prepareCall(sql);
             lisSuc = new ArrayList();

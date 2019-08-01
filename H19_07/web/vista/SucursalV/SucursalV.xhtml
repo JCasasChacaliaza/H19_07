@@ -4,41 +4,73 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-    <head>
+    <h:head>
         <title>Registrar Sucursales</title>
 
-    </head>
+    </h:head>
+    
     <h:body>
+        <p:growl autoUpdate="true"  />
         <h:form id="formIns">
             <p:panelGrid columns="2" >
 
                 <p:outputLabel value="Telefono"/>
-                <p:inputText value="#{sucursalC.sucursal.telSuc}" required="true" requiredMessage="Ingrese el Telefono"/>
+                <p:inputText value="#{sucursalC.sucursal.telSuc}" maxlength="8" required="true" requiredMessage="Ingrese el Telefono">
+                   <p:keyFilter regEx="/[0-9]/"/>
+                </p:inputText>
 
                 <p:outputLabel value="Direción"/>
-                <p:inputText value="#{sucursalC.sucursal.dirSuc}" required="true" requiredMessage="Ingrese ladirecció"/>
+                <p:inputText value="#{sucursalC.sucursal.dirSuc}" required="true" maxlength="50" requiredMessage="Ingrese ladirecció"/>
 
                 <p:outputLabel value="Ubicación"/>
-                <p:inputText value="#{sucursalC.sucursal.proSuc}" required="true" requiredMessage="Ingrese la ubicación"/>
+                <p:inputText value="#{sucursalC.sucursal.proSuc}" required="true" maxlength="50" requiredMessage="Ingrese la ubicación"/>
 
             </p:panelGrid>     
-            <p:commandButton value="Registrar" actionListener="#{sucursalC.registrar()}" update="" />            
+            <p:commandButton value="Registrar" actionListener="#{sucursalC.registrar()}" update="formIns :form" />            
         </h:form>  
 
         <h:form id="form" >
-            <p:dataTable>
+            <p:dataTable value="#{sucursalC.lisSuc}" var="lista"
+                         rowKey="#{lista.idSuc}" selection="#{sucursalC.sucursal}"
+                         selectionMode="single"  id="dtTable">
                 
-                
+                <p:column headerText="Telefono" >
+                    <p:outputLabel value="#{lista.telSuc}"  />                                        
+                </p:column>
 
-
+                <p:column headerText="Direccion" >
+                    <p:outputLabel value="#{lista.dirSuc}"  />                                        
+                </p:column>
+                <p:column headerText="Lugar del Local" >
+                    <p:outputLabel value="#{lista.proSuc}"  />                                        
+                </p:column>                                
             </p:dataTable>
+            <p:contextMenu for="dtTable">
+                <p:menuitem value="Modificar" update=":dlgDatos" oncomplete="PF('wdlgDatos').show();" />
+                <p:menuitem value="Eliminar" update="dtTable" actionListener="#{sucursalC.eliminar()}"/>
+            </p:contextMenu>            
         </h:form>
 
 
+        <p:dialog id="dlgDatos" widgetVar="wdlgDatos" >
+            <h:form>
+                <p:panelGrid columns="2" >
 
+                    <p:outputLabel value="Telefono"/>
+                    <p:inputText value="#{sucursalC.sucursal.telSuc}" maxlength="8" required="true" requiredMessage="Ingrese el Telefono">
+                       <p:keyFilter regEx="/[0-9]/"/>
+                    </p:inputText>
 
+                    <p:outputLabel value="Direción"/>
+                    <p:inputText value="#{sucursalC.sucursal.dirSuc}" maxlength="50" required="true" requiredMessage="Ingrese ladirecció"/>
 
+                    <p:outputLabel value="Ubicación"/>
+                    <p:inputText value="#{sucursalC.sucursal.proSuc}" required="true" maxlength="50" requiredMessage="Ingrese la ubicación"/>
+                </p:panelGrid>     
+                <p:commandButton value="Modificar" actionListener="#{sucursalC.modificar()}" update=":form" oncomplete="PF('wdlgDatos').hide();" />    
+                <p:commandButton value="Cancelar" immediate="true" oncomplete="PF('wdlgDatos').hide();" />    
 
-
+            </h:form>
+        </p:dialog>  
     </h:body>
 </html>
