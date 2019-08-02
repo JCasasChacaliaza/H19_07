@@ -10,11 +10,14 @@
 
         <ui:composition template="./../Templete/plantila.xhtml">
 
-
+            <ui:define name="titlePage">
+                Asignacion de Personal
+            </ui:define>
 
             <ui:define name="content">
                 <h:body>
                     <p:growl autoUpdate="true" showDetail="true" />
+                    <h1>Asignacion de Personal </h1>
                     <h:form id="formIns" >
                         <p:panelGrid columns="2">                    
 
@@ -56,15 +59,15 @@
                             <p:column headerText="Grupo">
                                 <p:outputLabel value="#{lista.gruAsi}"/>
                             </p:column>
-                            
+
                             <p:column>
                                 <p:commandButton value="Modificar" update=":dlgDatos" actionListener="#{asignacionC.leerAsi(lista.idAsi)}" oncomplete="PF('wdlgDatos').show();" /> 
                                 <p:commandButton value="Eliminar" update="dtTable"  actionListener="#{asignacionC.eliminar(lista)}"/>
                             </p:column>
-                            
+
 
                         </p:dataTable>
-                         
+
 
                     </h:form>
 

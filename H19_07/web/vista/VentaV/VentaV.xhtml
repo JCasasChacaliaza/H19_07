@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+    <ui:composition template="./../Templete/plantila.xhtml">
+
+        <ui:define name="titlePage">
+            Ventas
+        </ui:define>
+
+        <ui:define name="content">
+            <h:form id="formIns">
+                <center>
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Nombre del Cliente"/>
+                        <p:inputText value="#{ventaC.venta.nomCli}" maxlength="50" required="true" requiredMessage="Ingrese el nombre"/>
+
+                        <p:outputLabel value="DNI del Cliente"/>
+                        <p:inputText value="#{ventaC.venta.dniCli}" maxlength="8" required="true" requiredMessage="Ingrese el DNI"/>
+
+                        <p:outputLabel value="Vendedor" for="aul" />
+                        <p:autoComplete id="aul" dropdown="true" value="#{ventaC.venta.autPer}" completeMethod="#{ventaC.completeTextidVen}" required="true" requiredMessage="Ingresa al Vendedor"/>
+                    </p:panelGrid>
+                    <p:commandButton value="Registrar" actionListener="#{ventaC.registrar()}" />
+                </center>
+            </h:form>                                      
+        </ui:define>
+
+    </ui:composition>
+
+</body>
+</html>
