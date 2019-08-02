@@ -7,7 +7,37 @@ public class Asignacion {
     private String estAsi;
     private String idVen;
     private String gruAsi;//grupo asignado 
+    
+   private String autVen;
+   private String autJef;
+   private String autSuc;
 
+    public String getAutVen() {
+        return autVen;
+    }
+
+    public void setAutVen(String autVen) {
+        this.autVen = autVen;
+    }
+
+    public String getAutJef() {
+        return autJef;
+    }
+
+    public void setAutJef(String autJef) {
+        this.autJef = autJef;
+    }
+
+    public String getAutSuc() {
+        return autSuc;
+    }
+
+    public void setAutSuc(String autSuc) {
+        this.autSuc = autSuc;
+    }
+
+   
+   
     public String getIdAsi() {
         return idAsi;
     }
