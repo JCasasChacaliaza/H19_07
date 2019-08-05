@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Anthony/Edooca/h1/H19_07/H19_07/src/java/dao/Impl/AsignacionImpl.java</file>
-            <file>file:/D:/Anthony/Edooca/h1/H19_07/H19_07/src/java/modelo/Asignacion.java</file>
-            <file>file:/D:/Anthony/Edooca/h1/H19_07/H19_07/web/vista/PersonaV/PersonaV.xhtml</file>
-            <file>file:/D:/Anthony/Edooca/h1/H19_07/H19_07/src/java/dao/Impl/PersonaImpl.java</file>
+            <file>file:/D:/Anthony/Edooca/h1/H19_07/H19_07/src/java/dao/Impl/VentaDImpl.java</file>
+            <file>file:/D:/Anthony/Edooca/h1/H19_07/H19_07/src/java/controlador/VentaC.java</file>
+            <file>file:/D:/Anthony/Edooca/h1/H19_07/H19_07/web/vista/VentaV/VentaV.xhtml</file>
+            <file>file:/D:/Anthony/Edooca/h1/H19_07/H19_07/web/vista/SucursalV/SucursalV.xhtml</file>
+            <file>file:/D:/Anthony/Edooca/h1/H19_07/H19_07/src/java/controlador/PersonaC.java</file>
         </group>
     </open-files>
 </project-private>

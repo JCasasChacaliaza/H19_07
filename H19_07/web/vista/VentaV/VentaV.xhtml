@@ -26,9 +26,37 @@
                         <p:outputLabel value="Vendedor" for="aul" />
                         <p:autoComplete id="aul" dropdown="true" value="#{ventaC.venta.autPer}" completeMethod="#{ventaC.completeTextidVen}" required="true" requiredMessage="Ingresa al Vendedor"/>
                     </p:panelGrid>
-                    <p:commandButton value="Registrar" actionListener="#{ventaC.registrar()}" />
+                    <p:commandButton value="Pedido" update=":dlgDatos" actionListener="#{ventaC.registrar()}" oncomplete="PF('wdlgDatos').show();" />
                 </center>
-            </h:form>                                      
+            </h:form>   
+
+            <p:dialog id="dlgDatos" widgetVar="wdlgDatos" >
+                <h:form>
+                    <p:panelGrid columns="2" >
+                        <p:outputLabel value="Cantidad"/>
+                        <p:inputText value="#{ventaC.detalleVenta.cantVentD}" required="true" requiredMessage="Ingrese la cantidad"/>
+
+                        <p:outputLabel value="Pedido" for="pd"/>
+                        <p:autoComplete id="pd" dropdown="true" value="#{ventaC.detalleVenta.autoVenta}" completeMethod="#{ventaC.completeTextidVenD}" required="true"  requiredMessage="Ingrese el Pedido" />
+                    </p:panelGrid>
+                    <p:commandButton value="Agragar Pedido" actionListener="#{ventaC.registraD()}" />                    
+                </h:form>
+                <p:dataTable value="#{ventaC.listD}" var="lista" rowKey="#{lista.codVenD}" 
+                             selection="#{ventaC.detalleVenta}" selectionMode="single" id="dtTableD">
+                    
+                    <p:column headerText="Venta" >
+                        <p:outputLabel value="#{lista.cantVentD}" />
+                    </p:column>
+                    
+                    <p:column headerText="Total" >
+                        <p:outputLabel value="#{lista.total}" />
+                    </p:column>                        
+                </p:dataTable>
+                
+
+
+            </p:dialog>
+
         </ui:define>
 
     </ui:composition>
