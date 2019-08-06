@@ -1,0 +1,1 @@
+GRANT EXECUTE ON sys.dbms_rls TO h19_07_ora;

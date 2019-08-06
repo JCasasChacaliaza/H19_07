@@ -1,0 +1,20 @@
+CREATE TABLE h19_07_ora.apex$_ws_links (
+  "ID" NUMBER NOT NULL,
+  ws_app_id NUMBER NOT NULL,
+  data_grid_id NUMBER,
+  row_id NUMBER,
+  webpage_id NUMBER,
+  component_level VARCHAR2(30 BYTE) CONSTRAINT apex$_ws_links_cl_ck CHECK (component_level in ('WEBSHEET','ROW','WORKSPACE','WEBPAGE')),
+  tags VARCHAR2(4000 BYTE),
+  show_on_homepage VARCHAR2(1 BYTE) CONSTRAINT apex$_ws_links_sh_ck CHECK (show_on_homepage in ('Y','N')),
+  link_name VARCHAR2(255 BYTE) NOT NULL,
+  url VARCHAR2(4000 BYTE) NOT NULL,
+  link_description VARCHAR2(4000 BYTE),
+  display_sequence NUMBER,
+  created_on DATE NOT NULL,
+  created_by VARCHAR2(255 BYTE) NOT NULL,
+  updated_on DATE,
+  updated_by VARCHAR2(255 BYTE),
+  CONSTRAINT apex$_ws_links_pk PRIMARY KEY ("ID"),
+  CONSTRAINT apex$_ws_links_fk FOREIGN KEY (row_id) REFERENCES h19_07_ora.apex$_ws_rows ("ID") ON DELETE CASCADE
+);

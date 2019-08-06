@@ -1,0 +1,1 @@
+CREATE INDEX h19_07_ora.apex$_acl_idx1 ON h19_07_ora.apex$_acl(ws_app_id);

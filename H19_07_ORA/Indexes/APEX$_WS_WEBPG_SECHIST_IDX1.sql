@@ -1,0 +1,1 @@
+CREATE INDEX h19_07_ora.apex$_ws_webpg_sechist_idx1 ON h19_07_ora.apex$_ws_webpg_section_history(ws_app_id,webpage_id,section_id);

@@ -1,0 +1,1 @@
+CREATE INDEX h19_07_ora.apex$_ws_files_idx2 ON h19_07_ora.apex$_ws_files(ws_app_id,webpage_id);

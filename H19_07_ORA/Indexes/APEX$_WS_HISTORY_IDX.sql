@@ -1,0 +1,1 @@
+CREATE INDEX h19_07_ora.apex$_ws_history_idx ON h19_07_ora.apex$_ws_history(ws_app_id,data_grid_id,row_id);

@@ -1,0 +1,1 @@
+CREATE SEQUENCE h19_07_ora.demo_order_items_seq;

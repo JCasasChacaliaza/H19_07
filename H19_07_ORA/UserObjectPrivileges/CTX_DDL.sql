@@ -1,0 +1,1 @@
+GRANT EXECUTE ON ctxsys.ctx_ddl TO h19_07_ora;

@@ -1,0 +1,1 @@
+CREATE INDEX h19_07_ora.demo_cust_name_ix ON h19_07_ora.demo_customers(cust_last_name,cust_first_name);

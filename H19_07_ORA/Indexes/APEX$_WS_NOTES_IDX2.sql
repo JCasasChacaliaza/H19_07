@@ -1,0 +1,1 @@
+CREATE INDEX h19_07_ora.apex$_ws_notes_idx2 ON h19_07_ora.apex$_ws_notes(ws_app_id,webpage_id);
