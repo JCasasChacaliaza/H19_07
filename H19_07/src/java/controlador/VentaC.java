@@ -5,6 +5,7 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -17,26 +18,23 @@ public class VentaC implements Serializable {
 
     private Ventas venta;
     private VentaImpl dao;
+    private List<Ventas> lisVent;
 
     @PostConstruct
     public void init() {
         try {
-            limpiar();
+
         } catch (Exception e) {
             System.out.println("Error " + e);
         }
     }
 
     public void limpiar() throws Exception {
-        try {
-            venta = new Ventas();
-        } catch (Exception e) {
-            throw e;
-        }
+        venta = new Ventas();
     }
 
     public VentaC() {
-
+        lisVent = new ArrayList<>();
         dao = new VentaImpl();
         venta = new Ventas();
     }
@@ -55,6 +53,7 @@ public class VentaC implements Serializable {
 
     public void modificar() throws Exception {
         try {
+            venta.setCodPer(dao.ObtenerCodigoPersonal(venta.getAutPer()));
             dao.modificar(venta);
             limpiar();
             FacesContext.getCurrentInstance().addMessage(null,

@@ -32,7 +32,7 @@ public class VentaDImpl extends Conexion implements ICRUD<DetalleVenta> {
     public void modificar(DetalleVenta modelo) throws Exception {
         try {
             Conexion();
-            String sql = "update venta_detalle set CANTVENTDET=?, IDPRO=? WHERE IDTEL=? ";
+            String sql = "update venta_detalle set cantventdet=?, IDPRO=? WHERE IDTEL=? ";
             PreparedStatement ps = this.getConectar().prepareStatement(sql);
             ps.setString(1, modelo.getCantVentD());
             ps.setString(2, modelo.getProdVentD());
@@ -62,6 +62,35 @@ public class VentaDImpl extends Conexion implements ICRUD<DetalleVenta> {
             cerrrar();
         }
     }
+    
+    public DetalleVenta leerDeta(String detal) throws Exception {
+        DetalleVenta leerDeta = null;
+        ResultSet rs;
+        try {
+            this.Conexion();
+            String sql = "  select IDTEL,cantventdet, CONCAT(NOMPRO,' ',PREPRO)as Pedido  from venta_detalle det "
+                    + " inner join producto pro "
+                    + " on pro.idpro = det.idpro "
+                    + " where IDTEL = ?";
+            PreparedStatement ps = this.getConectar().prepareCall(sql);
+            ps.setString(1, detal);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                leerDeta = new DetalleVenta();
+                leerDeta.setCodVenD(rs.getString("IDTEL"));
+                leerDeta.setAutoVenta(rs.getString("Pedido"));
+                leerDeta.setCantVentD(rs.getString("cantventdet"));
+                
+            }
+        } catch (SQLException e) {
+            throw e;
+        }finally{
+            cerrrar();
+        }
+        return leerDeta;
+
+    }
+
 
     @Override
     public List<DetalleVenta> Listar() throws Exception {
@@ -69,18 +98,18 @@ public class VentaDImpl extends Conexion implements ICRUD<DetalleVenta> {
         ResultSet rs;
         try {
             Conexion();
-            String sql = "select IDTEL,cantventdet, concat(nompro,' ', prepro)as Producto, (prepro*cantventdet)as Pedido  from venta_detalle det "
+            String sql = "select IDTEL,cantventdet, nompro, prepro , (prepro*cantventdet)as Pedido  from venta_detalle det "
                     + " inner join producto pro "
                     + " on pro.idpro = det.idpro "
-                    + " where idvent = (select DISTINCT ident_current('VENTA')AS ID FROM venta ) "
-                    + " group by IDTEL,cantventdet, nompro,prepro ";
+                    + " where idvent = (select DISTINCT ident_current('VENTA')AS ID FROM venta ) ";
             PreparedStatement ps = this.getConectar().prepareCall(sql);
             listaPed = new ArrayList();
             rs = ps.executeQuery();
             while (rs.next()) {
                 DetalleVenta detVen = new DetalleVenta();
                 detVen.setCodVenD(rs.getString("IDTEL"));
-                detVen.setCantVentD(rs.getString("Producto"));
+                detVen.setProdVentD(rs.getString("nompro"));
+                detVen.setCantVentD(rs.getString("cantventdet"));
                 detVen.setTotal(rs.getString("Pedido"));
                 listaPed.add(detVen);
             }
@@ -94,7 +123,7 @@ public class VentaDImpl extends Conexion implements ICRUD<DetalleVenta> {
         this.Conexion();
         ResultSet rs;
         try {
-            String sql = "select IDPRO from PRODUCTO WHERE CONCAT(NOMPRO, PREPRO)like ? ";
+            String sql = "select IDPRO from PRODUCTO WHERE CONCAT(NOMPRO,' ',PREPRO)like ? ";
             PreparedStatement ps = this.getConectar().prepareCall(sql);
             ps.setString(1, asignacion);
             rs = ps.executeQuery();
@@ -112,7 +141,7 @@ public class VentaDImpl extends Conexion implements ICRUD<DetalleVenta> {
         ResultSet rs;
         List<String> Lista;
         try {
-            String sql = "select CONCAT(NOMPRO, PREPRO) AS PEDIDO from PRODUCTO WHERE NOMPRO like ? AND ESTPRO like 'A' ";
+            String sql = "select CONCAT(NOMPRO,' ',PREPRO) AS PEDIDO from PRODUCTO WHERE NOMPRO like ? AND ESTPRO like 'A' ";
             PreparedStatement ps = this.getConectar().prepareCall(sql);
             ps.setString(1, "%" + Consulta + "%");
             Lista = new ArrayList<>();

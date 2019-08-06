@@ -4,7 +4,8 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
 
     </h:head>
@@ -29,15 +30,37 @@
             <p:dataTable value="#{ventaDetC.listD}" var="lista" rowKey="#{lista.codVenD}" 
                          selection="#{ventaDetC.detalleVenta}" selectionMode="single" id="dtTableD">
 
-                <p:column headerText="Venta" >
-                    <p:outputLabel value="#{lista.cantVentD}" />
+                <p:column headerText="Producto">
+                    <p:outputLabel value="#{lista.prodVentD}" />
                 </p:column>
-                <p:column headerText="Total" >
-                    <p:outputLabel value="#{lista.total}" />
-                </p:column>                        
-            </p:dataTable>
-        </h:form>
+                <p:column headerText="Costo Unitario" >
+                    <p:outputLabel  value="#{lista.cantVentD}" />
+                </p:column>
+                <p:column headerText="Costo por Cantidad" >
+                    <p:outputLabel value="S/ #{lista.total}" />                
+                </p:column>                  
 
+                <p:column >
+                    <p:commandButton value="Modificar" update=":dlgDatos" oncomplete="PF('wdlgDatos').show();" actionListener="#{ventaDetC.lerrD(lista.codVenD)}"/>
+                    <p:commandButton value="Eliminar" update="dtTableD" actionListener="#{ventaDetC.eliminarD(lista.codVenD)}" />
+                </p:column>                  
+            </p:dataTable>
+            
+        </h:form>
+        <p:dialog id="dlgDatos" widgetVar="wdlgDatos" >
+            <h:form>
+                <p:panelGrid columns="2" >
+                    <p:outputLabel value="Pedido" for="pd"/>
+                    <p:autoComplete id="pd" dropdown="true" value="#{ventaDetC.detalleVenta.autoVenta}" completeMethod="#{ventaDetC.completeTextidVenD}" required="true"  requiredMessage="Ingrese el Pedido" />
+
+                    <p:outputLabel value="Cantidad"/>
+                    <p:inputText value="#{ventaDetC.detalleVenta.cantVentD}" required="true" requiredMessage="Ingrese la cantidad"/>
+                </p:panelGrid>     
+                <p:commandButton value="Modificar" actionListener="#{ventaDetC.modificarD()}" update=":formD" oncomplete="PF('wdlgDatos').hide();" />    
+                <p:commandButton value="Cancelar" immediate="true" oncomplete="PF('wdlgDatos').hide();" />    
+
+            </h:form>
+        </p:dialog> 
 
 
     </h:body>

@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import modelo.DetalleVenta;
+import org.primefaces.event.RowEditEvent;
 
 @Named(value = "ventaDetC")
 @SessionScoped
@@ -52,8 +53,8 @@ public class VentaDetC implements Serializable {
         try {
             detalleVenta.setProdVentD(daoD.ObtenerCodigoPedido(detalleVenta.getAutoVenta()));
             daoD.modificar(detalleVenta);
-            limpiarD();
             listarD();
+            limpiarD();
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Modificado Correcto del Pedido", ""));
         } catch (Exception e) {
@@ -61,15 +62,24 @@ public class VentaDetC implements Serializable {
         }
     }
 
-    public void eliminarD() throws Exception {
+    public void eliminarD(DetalleVenta deta) throws Exception {
         try {
 
-            daoD.eliminar(detalleVenta);
+            daoD.eliminar(deta);
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Eliminado Correcto del Pedido", ""));
         } catch (Exception e) {
             throw e;
         }
+    }
+
+    public void lerrD(String idDeta) throws Exception {
+        try {
+            detalleVenta = daoD.leerDeta(idDeta);
+        } catch (Exception e) {
+            throw e;
+        }
+
     }
 
     public void listarD() throws Exception {
@@ -81,17 +91,25 @@ public class VentaDetC implements Serializable {
     }
 
     public void limpiarD() throws Exception {
-        try {
+   
             detalleVenta = new DetalleVenta();
-        } catch (Exception e) {
-            throw e;
-        }
+      
 
     }
 
     public List<String> completeTextidVenD(String query) throws SQLException, Exception {
         VentaDImpl demo = new VentaDImpl();
         return demo.autocompletePedido(query);
+    }
+
+    public void onRowEdit(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Car Edited", ((DetalleVenta) event.getObject()).getCodVenD());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edit Cancelled", ((DetalleVenta) event.getObject()).getCodVenD());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
     public VentaDImpl getDaoD() {
