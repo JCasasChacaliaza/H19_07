@@ -66,8 +66,7 @@ public class VentaImpl extends Conexion implements ICRUD<Ventas> {
 
     @Override
     public List<Ventas> Listar() throws Exception {
-        return null;
-
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public String ObtenerCodigoPersonal(String asignacion) throws SQLException, Exception {

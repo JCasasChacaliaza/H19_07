@@ -15,7 +15,7 @@ public class VentaDImpl extends Conexion implements ICRUD<DetalleVenta> {
     public void registrar(DetalleVenta modelo) throws Exception {
         try {
             Conexion();
-            String sql = "insert into venta_detalle( ESTVEND ,CANTVENTDET,IDPRO,idvent)VALUES ('A' , ? , ? ,(select DISTINCT ident_current('VENTA')AS ID FROM venta ))";
+            String sql = "insert into venta_detalle( ESTVEND , CANTVENTDET ,IDPRO ,IDVENT)VALUES ('A' , ? , ? ,(select DISTINCT ident_current('VENTA')AS ID FROM venta ) )";
             PreparedStatement ps = this.getConectar().prepareStatement(sql);
             ps.setString(1, modelo.getCantVentD());
             ps.setString(2, modelo.getProdVentD());
@@ -94,7 +94,7 @@ public class VentaDImpl extends Conexion implements ICRUD<DetalleVenta> {
         this.Conexion();
         ResultSet rs;
         try {
-            String sql = "select IDPRO from PRODUCTO WHERE CONCAT (NOMPRO, PREPRO)like ? ";
+            String sql = "select IDPRO from PRODUCTO WHERE CONCAT(NOMPRO, PREPRO)like ? ";
             PreparedStatement ps = this.getConectar().prepareCall(sql);
             ps.setString(1, asignacion);
             rs = ps.executeQuery();
@@ -108,18 +108,19 @@ public class VentaDImpl extends Conexion implements ICRUD<DetalleVenta> {
     }
 
     public List<String> autocompletePedido(String Consulta) throws SQLException, Exception {
-        this.Conexion();
+        Conexion();
         ResultSet rs;
         List<String> Lista;
         try {
-            String sql = "select CONCAT(NOMPRO, PREPRO) AS PEDIDO from PRODUCTO WHERE IDPRO like ? AND ESTPRO like 'A'";
+            String sql = "select CONCAT(NOMPRO, PREPRO) AS PEDIDO from PRODUCTO WHERE NOMPRO like ? AND ESTPRO like 'A' ";
             PreparedStatement ps = this.getConectar().prepareCall(sql);
             ps.setString(1, "%" + Consulta + "%");
             Lista = new ArrayList<>();
             rs = ps.executeQuery();
             while (rs.next()) {
-                Lista.add(rs.getString("PEDIDO"));
+                Lista.add(rs.getString("PEDIDO"));                
             }
+
             return Lista;
         } catch (SQLException e) {
             throw e;

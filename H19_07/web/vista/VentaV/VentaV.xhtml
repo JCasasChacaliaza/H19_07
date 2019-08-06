@@ -5,61 +5,36 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
-    <body>
+    <h:body>
 
-    <ui:composition template="./../Templete/plantila.xhtml">
+        <ui:composition template="./../Templete/plantila.xhtml">
 
-        <ui:define name="titlePage">
-            Ventas
-        </ui:define>
+            <ui:define name="titlePage">
+                Ventas
+            </ui:define>
 
-        <ui:define name="content">
-            <h:form id="formIns">
-                <center>
-                    <p:panelGrid columns="2">
-                        <p:outputLabel value="Nombre del Cliente"/>
-                        <p:inputText value="#{ventaC.venta.nomCli}" maxlength="50" required="true" requiredMessage="Ingrese el nombre"/>
+            <ui:define name="content">
+                <h:form id="formIns">
+                    <center>
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="Nombre del Cliente"/>
+                            <p:inputText value="#{ventaC.venta.nomCli}" maxlength="50" required="true" requiredMessage="Ingrese el nombre"/>
 
-                        <p:outputLabel value="DNI del Cliente"/>
-                        <p:inputText value="#{ventaC.venta.dniCli}" maxlength="8" required="true" requiredMessage="Ingrese el DNI"/>
+                            <p:outputLabel value="DNI del Cliente"/>
+                            <p:inputText value="#{ventaC.venta.dniCli}" maxlength="8" required="true" requiredMessage="Ingrese el DNI"/>
 
-                        <p:outputLabel value="Vendedor" for="aul" />
-                        <p:autoComplete id="aul" dropdown="true" value="#{ventaC.venta.autPer}" completeMethod="#{ventaC.completeTextidVen}" required="true" requiredMessage="Ingresa al Vendedor"/>
-                    </p:panelGrid>
-                    <p:commandButton value="Pedido" update=":dlgDatos" actionListener="#{ventaC.registrar()}" oncomplete="PF('wdlgDatos').show();" />
-                </center>
-            </h:form>   
-
-            <p:dialog id="dlgDatos" widgetVar="wdlgDatos" >
-                <h:form>
-                    <p:panelGrid columns="2" >
-                        <p:outputLabel value="Cantidad"/>
-                        <p:inputText value="#{ventaC.detalleVenta.cantVentD}" required="true" requiredMessage="Ingrese la cantidad"/>
-
-                        <p:outputLabel value="Pedido" for="pd"/>
-                        <p:autoComplete id="pd" dropdown="true" value="#{ventaC.detalleVenta.autoVenta}" completeMethod="#{ventaC.completeTextidVenD}" required="true"  requiredMessage="Ingrese el Pedido" />
-                    </p:panelGrid>
-                    <p:commandButton value="Agragar Pedido" actionListener="#{ventaC.registraD()}" />                    
-                </h:form>
-                <p:dataTable value="#{ventaC.listD}" var="lista" rowKey="#{lista.codVenD}" 
-                             selection="#{ventaC.detalleVenta}" selectionMode="single" id="dtTableD">
-                    
-                    <p:column headerText="Venta" >
-                        <p:outputLabel value="#{lista.cantVentD}" />
-                    </p:column>
-                    
-                    <p:column headerText="Total" >
-                        <p:outputLabel value="#{lista.total}" />
-                    </p:column>                        
-                </p:dataTable>
+                            <p:outputLabel value="Vendedor" for="aul" />
+                            <p:autoComplete id="aul" dropdown="true" value="#{ventaC.venta.autPer}" completeMethod="#{ventaC.completeTextidVen}" required="true" requiredMessage="Ingresa al Vendedor"/>
+                        </p:panelGrid>
+                        <p:commandButton value="Pedido" actionListener="#{ventaC.registrar()}" />
+                    </center>
+                </h:form>  
                 
+                <ui:include src="VentaDetV.xhtml" />
+               
+            </ui:define>
 
+        </ui:composition>
 
-            </p:dialog>
-
-        </ui:define>
-
-    </ui:composition>
-
-</body>
+    </h:body>
 </html>
