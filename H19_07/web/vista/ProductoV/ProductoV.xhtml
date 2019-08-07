@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
-        
+
 
     </h:head>
     <h:body>
@@ -26,7 +26,12 @@
 
 
                             <p:outputLabel value="Categoria"/>
-                            <p:inputText value="#{productoC.productos.catProc}" required="true" requiredMessage="Ingresa la Categoria" />
+                            <p:selectOneMenu value="#{productoC.productos.catProc}" required="true" requiredMessage="Ingresa la Categoria" >
+                                <f:selectItem itemLabel="Selecciona una categoria" noSelectionOption="true" />
+                                <f:selectItem itemLabel="Herramienta" itemValue="Herramienta" />
+                                <f:selectItem itemLabel="Repuesto" itemValue="Repuesto" />
+                                <f:selectItem itemLabel="Accesorio" itemValue="Accesorio" />                            
+                            </p:selectOneMenu>
 
 
 
@@ -55,7 +60,7 @@
                         </p:column>
 
                         <p:column headerText="Precio del Producto" >
-                            <h:outputLabel value="#{lista.preProc}"/>
+                            <h:outputLabel value="S/ #{lista.preProc}"/>
                         </p:column>
 
                         <p:column headerText="Categoria" >
@@ -83,7 +88,12 @@
                             <p:inputText value="#{productoC.productos.nomProc}"  maxlength="50" required="true" requiredMessage="Ingresa el nombre del Producto" />
 
                             <p:outputLabel value="Categoria"/>
-                            <p:inputText value="#{productoC.productos.catProc}" required="true" requiredMessage="Ingresa la Cateria" />
+                            <p:selectOneMenu value="#{productoC.productos.catProc}" required="true" requiredMessage="Ingresa la Categoria" >
+                                <f:selectItem itemLabel="Selecciona una categoria" noSelectionOption="true" />
+                                <f:selectItem itemLabel="Herramienta" itemValue="Herramienta" />
+                                <f:selectItem itemLabel="Repuesto" itemValue="Repuesto" />
+                                <f:selectItem itemLabel="Accesorio" itemValue="Accesorio" />                            
+                            </p:selectOneMenu>
 
                             <p:outputLabel value="Cantidad"/>
                             <p:inputText id="txt1" value="#{productoC.productos.cantProc}" required="true" requiredMessage="Ingresa la Cantidad" >
