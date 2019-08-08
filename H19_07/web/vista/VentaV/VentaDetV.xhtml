@@ -19,7 +19,9 @@
                 <p:autoComplete id="pd" dropdown="true" value="#{ventaDetC.detalleVenta.autoVenta}" completeMethod="#{ventaDetC.completeTextidVenD}" required="true"  requiredMessage="Ingrese el Pedido" />
 
                 <p:outputLabel value="Cantidad"/>
-                <p:inputText value="#{ventaDetC.detalleVenta.cantVentD}" required="true" requiredMessage="Ingrese la cantidad"/>
+                <p:inputText value="#{ventaDetC.detalleVenta.cantVentD}" required="true" requiredMessage="Ingrese la cantidad">
+                    <p:keyFilter regEx="/[0-9]/"/>
+                </p:inputText>
 
 
             </p:panelGrid>
@@ -33,7 +35,7 @@
                 <p:column headerText="Producto">
                     <p:outputLabel value="#{lista.prodVentD}" />
                 </p:column>
-                
+
                 <p:column headerText="Cantidad" >
                     <p:outputLabel  value="#{lista.cantVentD}" />
                 </p:column>
@@ -47,7 +49,7 @@
                     <p:commandButton value="Eliminar" update="dtTableD" actionListener="#{ventaDetC.eliminarD(lista.codVenD)}" />
                 </p:column>                  
             </p:dataTable>
-            
+
         </h:form>
         <p:dialog id="dlgDatos" widgetVar="wdlgDatos" >
             <h:form>
@@ -56,7 +58,9 @@
                     <p:autoComplete id="pd" dropdown="true" value="#{ventaDetC.detalleVenta.autoVenta}" completeMethod="#{ventaDetC.completeTextidVenD}" required="true"  requiredMessage="Ingrese el Pedido" />
 
                     <p:outputLabel value="Cantidad"/>
-                    <p:inputText value="#{ventaDetC.detalleVenta.cantVentD}" required="true" requiredMessage="Ingrese la cantidad"/>
+                    <p:inputText value="#{ventaDetC.detalleVenta.cantVentD}" required="true" requiredMessage="Ingrese la cantidad">
+                        <p:keyFilter regEx="/[0-9]/"/>
+                    </p:inputText>
                 </p:panelGrid>     
                 <p:commandButton value="Modificar" actionListener="#{ventaDetC.modificarD()}" update=":formD" oncomplete="PF('wdlgDatos').hide();" />    
                 <p:commandButton value="Cancelar" immediate="true" oncomplete="PF('wdlgDatos').hide();" />    

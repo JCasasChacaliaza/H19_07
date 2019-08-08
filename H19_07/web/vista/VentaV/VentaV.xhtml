@@ -22,7 +22,10 @@
                             <p:inputText value="#{ventaC.venta.nomCli}" maxlength="50" required="true" requiredMessage="Ingrese el nombre"/>
 
                             <p:outputLabel value="DNI del Cliente"/>
-                            <p:inputText value="#{ventaC.venta.dniCli}" maxlength="8" required="true" requiredMessage="Ingrese el DNI"/>
+                            <p:inputText value="#{ventaC.venta.dniCli}" maxlength="8" required="true" requiredMessage="Ingrese el DNI">
+                                <p:keyFilter regEx="/[0-9]/"/>
+                            </p:inputText>
+
 
                             <p:outputLabel value="Vendedor" for="aul" />
                             <p:autoComplete id="aul" dropdown="true" value="#{ventaC.venta.autPer}" completeMethod="#{ventaC.completeTextidVen}" required="true" requiredMessage="Ingresa al Vendedor"/>
@@ -30,9 +33,9 @@
                         <p:commandButton value="Pedido" actionListener="#{ventaC.registrar()}" />
                     </center>
                 </h:form>  
-                
+
                 <ui:include src="VentaDetV.xhtml" />
-               
+
             </ui:define>
 
         </ui:composition>
