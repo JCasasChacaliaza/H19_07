@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BolVent" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9ef01e2d-0029-44f0-a743-d4531dd57c30">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SQLServer"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="CODVEN" class="java.lang.String">
+		<parameterDescription><![CDATA[CODIGO DE VENTA]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT *, SUM (PREUNI)AS TOTAL FROM vwBoleta
+WHERE IDVENT = (select DISTINCT ident_current('VENTA')AS ID FROM venta )
+GROUP BY FECVENT, PERSONAL, IDVENT, NOMCLI, DNICLI,NOMPRO, CANTVENTDET, PREUNI]]>
+	</queryString>
+	<field name="FECVENT" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="FECVENT"/>
+	</field>
+	<field name="PERSONAL" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="PERSONAL"/>
+	</field>
+	<field name="idvent" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="idvent"/>
+	</field>
+	<field name="nomcli" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nomcli"/>
+	</field>
+	<field name="dnicli" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="dnicli"/>
+	</field>
+	<field name="NOMPRO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="NOMPRO"/>
+	</field>
+	<field name="cantventdet" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="cantventdet"/>
+	</field>
+	<field name="PreUni" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="PreUni"/>
+	</field>
+	<field name="TOTAL" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="TOTAL"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="95" splitType="Stretch">
+			<staticText>
+				<reportElement x="140" y="30" width="501" height="51" uuid="cd5e3378-702b-45e9-a82f-5ade054d1dec"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Boleta de Pago]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="90" splitType="Stretch">
+			<textField>
+				<reportElement x="600" y="10" width="120" height="31" uuid="cbdaba88-b397-424c-b1eb-b335e081f87e"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid" lineColor="#4A2423"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PERSONAL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="470" y="10" width="121" height="31" uuid="0721b10d-76bb-4804-803a-5edbd19f98c9"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid" lineColor="#4A2423"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Personal:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="50" width="130" height="31" uuid="175e003a-0df9-4089-bcbf-b38eab26e39e"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid" lineColor="#4A2423"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Fecha de Compra]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="10" width="130" height="30" uuid="34cd1d99-55f9-499c-b46a-2f5f7ed12703"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid" lineColor="#4A2423"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomcli}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="50" width="60" height="30" uuid="f122b753-00e4-4f20-a838-9192f57d577d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FECVENT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="10" width="100" height="31" uuid="1c978cbe-284c-4dcd-a8de-64e37f68da37"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid" lineColor="#4A2423"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Cliente]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement x="11" y="10" width="191" height="21" uuid="0b76fc78-ac3e-4279-98b9-756b00647673"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="284" y="10" width="191" height="21" uuid="7f64900a-256a-40ce-926c-d701cb58e78f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Detalle de la Compra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="534" y="10" width="191" height="21" uuid="35eb0d2c-e30e-45dd-9590-979f4c41ef95"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Precio Unitario]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<textField>
+				<reportElement x="11" y="4" width="191" height="21" uuid="89c93510-5352-4ff8-b7c0-2875d22a7b39">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ed3ff4b3-859a-49d3-a961-006405453401"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cantventdet}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="533" y="4" width="191" height="21" uuid="4752dc97-38eb-4d85-8fdc-9594dc78ef5d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="66d1bac7-e6bf-481b-a625-89383f36a435"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{PreUni}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="285" y="4" width="191" height="21" uuid="ad0146f5-cfec-4f49-bb37-8507801b9acd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6a4b5bdd-2b3a-4222-8599-d8bb65c4eb6f"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NOMPRO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="47" splitType="Stretch">
+			<staticText>
+				<reportElement x="460" y="10" width="191" height="21" uuid="9b6be3ab-8c7f-4d95-8a8e-9951b95183c1">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement x="571" y="10" width="96" height="21" uuid="5a2d74d9-f1b0-46ff-870c-786ec7e21532">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{TOTAL}.intValue()]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

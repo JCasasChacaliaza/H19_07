@@ -91,7 +91,7 @@ public class VentaDetC implements Serializable {
     }
 
     public void limpiarD() throws Exception {
-   
+            
             detalleVenta = new DetalleVenta();
       
 
@@ -102,15 +102,6 @@ public class VentaDetC implements Serializable {
         return demo.autocompletePedido(query);
     }
 
-    public void onRowEdit(RowEditEvent event) {
-        FacesMessage msg = new FacesMessage("Car Edited", ((DetalleVenta) event.getObject()).getCodVenD());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
-
-    public void onRowCancel(RowEditEvent event) {
-        FacesMessage msg = new FacesMessage("Edit Cancelled", ((DetalleVenta) event.getObject()).getCodVenD());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
 
     public VentaDImpl getDaoD() {
         return daoD;

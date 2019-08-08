@@ -6,7 +6,9 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -77,6 +79,19 @@ public class VentaC implements Serializable {
     public List<String> completeTextidVen(String query) throws SQLException, Exception {
         VentaImpl Conexion = new VentaImpl();
         return Conexion.autocompletePersonal(query);
+    }
+
+    //DESCARGAR REPORTE DE ALUMNOS
+    public void REPORTE_PDF_VENTA(Ventas CodigoVent) throws Exception {
+        VentaImpl VentaImpl = new VentaImpl();
+        try {
+            Map<String, Object> parameters = new HashMap(); // Libro de parametros
+            parameters.put(null, CodigoVent); //Insertamos un parametro
+            VentaImpl.REPORTE_PDF_BOLETA(parameters); //Pido exportar Reporte con los parametros
+//            report.exportarPDF2(parameters);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     public Ventas getVenta() {

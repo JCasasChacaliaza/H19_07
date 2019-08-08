@@ -29,8 +29,14 @@
 
                             <p:outputLabel value="Vendedor" for="aul" />
                             <p:autoComplete id="aul" dropdown="true" value="#{ventaC.venta.autPer}" completeMethod="#{ventaC.completeTextidVen}" required="true" requiredMessage="Ingresa al Vendedor"/>
+                            
+                            <p:outputLabel value="Boleta" />
+                            <p:commandLink ajax="false" actionListener="#{ventaC.REPORTE_PDF_VENTA(CodigoVent)}">
+                                <h:graphicImage url="../Image/descarga.png" width="10%" />
+                            </p:commandLink> 
+
                         </p:panelGrid>
-                        <p:commandButton value="Pedido" actionListener="#{ventaC.registrar()}" />
+                        <p:commandButton value="Registrar Cliente" actionListener="#{ventaC.registrar()}" />
                     </center>
                 </h:form>  
 
