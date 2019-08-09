@@ -81,18 +81,7 @@ public class VentaC implements Serializable {
         return Conexion.autocompletePersonal(query);
     }
 
-    //DESCARGAR REPORTE DE ALUMNOS
-    public void REPORTE_PDF_VENTA(Ventas CodigoVent) throws Exception {
-        VentaImpl VentaImpl = new VentaImpl();
-        try {
-            Map<String, Object> parameters = new HashMap(); // Libro de parametros
-            parameters.put(null, CodigoVent); //Insertamos un parametro
-            VentaImpl.REPORTE_PDF_BOLETA(parameters); //Pido exportar Reporte con los parametros
-//            report.exportarPDF2(parameters);
-        } catch (Exception e) {
-            throw e;
-        }
-    }
+
 
     public Ventas getVenta() {
         return venta;

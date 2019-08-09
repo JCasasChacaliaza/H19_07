@@ -2,23 +2,12 @@ package dao.Impl;
 
 import dao.Conexion;
 import dao.ICRUD;
-import java.io.File;
-import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import javax.faces.context.FacesContext;
-import javax.servlet.ServletOutputStream;
-
-import net.sf.jasperreports.engine.JRException;;
-import javax.servlet.http.HttpServletResponse;
 import modelo.Ventas;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
 
 public class VentaImpl extends Conexion implements ICRUD<Ventas> {
 
@@ -30,7 +19,7 @@ public class VentaImpl extends Conexion implements ICRUD<Ventas> {
             PreparedStatement ps = this.getConectar().prepareStatement(sql);
             ps.setString(1, modelo.getNomCli());
             ps.setString(2, modelo.getDniCli());
-            ps.setString(3, modelo.getCodPer());
+            ps.setInt(3, modelo.getCodPer());
             ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
@@ -48,8 +37,8 @@ public class VentaImpl extends Conexion implements ICRUD<Ventas> {
             PreparedStatement ps = this.getConectar().prepareStatement(sql);
             ps.setString(1, modelo.getNomCli());
             ps.setString(2, modelo.getDniCli());
-            ps.setString(3, modelo.getCodPer());
-            ps.setString(4, modelo.getCodPer());
+            ps.setInt(3, modelo.getCodPer());
+            ps.setInt(4, modelo.getCodPer());
             ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
@@ -65,7 +54,7 @@ public class VentaImpl extends Conexion implements ICRUD<Ventas> {
             Conexion();
             String sql = "UPDATE VENTA SET ESTVEN ='I', WHERE IDVENT=?";
             PreparedStatement ps = this.getConectar().prepareStatement(sql);
-            ps.setString(1, modelo.getCodPer());
+            ps.setInt(1, modelo.getCodPer());
             ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
@@ -80,7 +69,7 @@ public class VentaImpl extends Conexion implements ICRUD<Ventas> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public String ObtenerCodigoPersonal(String asignacion) throws SQLException, Exception {
+    public int ObtenerCodigoPersonal(String asignacion) throws SQLException, Exception {
         this.Conexion();
         ResultSet rs;
         try {
@@ -89,9 +78,9 @@ public class VentaImpl extends Conexion implements ICRUD<Ventas> {
             ps.setString(1, asignacion);
             rs = ps.executeQuery();
             if (rs.next()) {
-                return rs.getString("IDPER");
+                return rs.getInt("IDPER");
             }
-            return null;
+            return 0;
         } catch (SQLException e) {
             throw e;
         }
@@ -114,20 +103,6 @@ public class VentaImpl extends Conexion implements ICRUD<Ventas> {
         } catch (SQLException e) {
             throw e;
         }
-    }
-
-    //METODO REPORTE_PDF_ALUMNO PARA LA DESCARGA
-    public void REPORTE_PDF_BOLETA(Map parameters) throws JRException, IOException, Exception {
-        Conexion();
-        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("vista\\Report\\BoletaRe\\BolVent.jasper"));
-        JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parameters, this.getConectar());
-        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-        response.addHeader("Content-disposition", "attachment; filename=Boleta de Compra.pdf");
-        try (ServletOutputStream stream = response.getOutputStream()) {
-            JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
-            stream.flush();
-        }
-        FacesContext.getCurrentInstance().responseComplete();
     }
 
 }

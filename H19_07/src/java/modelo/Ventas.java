@@ -2,24 +2,22 @@ package modelo;
 
 public class Ventas {
     
-    private String idVent;
+    private int idVent;
     private String nomCli;
     private String dniCli;
     private String fechVen;
-    private String codPer;
+    private int codPer;
     
     private String autPer;
 
-    public String getIdVent() {
+    public int getIdVent() {
         return idVent;
     }
 
-    public void setIdVent(String idVent) {
+    public void setIdVent(int idVent) {
         this.idVent = idVent;
     }
 
-    
-    
     public String getNomCli() {
         return nomCli;
     }
@@ -44,11 +42,11 @@ public class Ventas {
         this.fechVen = fechVen;
     }
 
-    public String getCodPer() {
+    public int getCodPer() {
         return codPer;
     }
 
-    public void setCodPer(String codPer) {
+    public void setCodPer(int codPer) {
         this.codPer = codPer;
     }
 

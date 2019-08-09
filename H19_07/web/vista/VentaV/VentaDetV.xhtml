@@ -25,13 +25,28 @@
 
 
             </p:panelGrid>
-            <p:commandButton value="Agregar Pedido" update=":formD" actionListener="#{ventaDetC.registraD()}" />                    
+            <p:commandButton value="Agregar Pedido" update=":formD" actionListener="#{ventaDetC.registraD()}" />  
+            
+            
+            <p:commandButton ajax="false" 
+                                     value="Generar boleta"
+                                     actionListener="#{ventaDetC.REPORTE_PDF_VENTA(3090)}">
+            </p:commandButton> 
         </h:form>
 
         <h:form id="formD">
             <p:dataTable value="#{ventaDetC.listD}" var="lista" rowKey="#{lista.codVenD}" 
                          selection="#{ventaDetC.detalleVenta}" selectionMode="single" id="dtTableD">
-                
+
+
+                <p:column>
+                    <p:commandButton ajax="false" 
+                                     value="Generar boleta"
+                                     actionListener="#{ventaDetC.REPORTE_PDF_VENTA(lista.CODVEN)}">
+                    </p:commandButton> 
+                </p:column>
+
+
                 <p:column headerText="Producto">
                     <p:outputLabel value="#{lista.prodVentD}" />
                 </p:column>

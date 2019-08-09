@@ -5,12 +5,22 @@ public class DetalleVenta {
 
     private String codVenD;
     private String cantVentD;
+    private int CODVEN;
     private String prodVentD;
     private String vendVentD;
     
     private String total;
     private String autoVenta;
 
+    public int getCODVEN() {
+        return CODVEN;
+    }
+
+    public void setCODVEN(int CODVEN) {
+        this.CODVEN = CODVEN;
+    }
+
+    
     public String getTotal() {
         return total;
     }
