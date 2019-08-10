@@ -36,8 +36,7 @@
 
 .left_content {
     background-color: #dddddd;
-    padding: 5px;
-    margin-left: 170px;
+    
 }
 
 .right_content {
@@ -47,7 +46,7 @@
 }
 
 #top a:link, #top a:visited {
-  color: white;
+  color: #000000;
   font-weight : bold;
   text-decoration: none;
 }

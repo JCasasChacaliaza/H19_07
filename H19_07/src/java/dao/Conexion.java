@@ -12,7 +12,7 @@ public class Conexion {
         try {
             if (conectar == null) {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                conectar = DriverManager.getConnection("jdbc:sqlserver://localhost; database=demoII", "admin", "admin");
+                conectar = DriverManager.getConnection("jdbc:sqlserver://localhost; database=H19_07_BD", "usuarioSQL", "ads_thony");
             }
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("Error " + e);
@@ -31,7 +31,7 @@ public class Conexion {
     public static void main(String[] args) {
         Conexion dao = new Conexion();
         dao.Conexion();
-        if(dao.getConectar() != null) {
+        if (dao.getConectar() != null) {
             System.out.println("conectado");
         } else {
             System.out.println("no conecta");

@@ -17,24 +17,21 @@
             <p:autoUpdate/>
         </p:growl>
         <div id="top">
-            
-        </div>
-        <div id="left">
-            <h:form>
-                <a ></a>
-                <p:slideMenu style="width:140px;height: calc(100vh - 75px)">
-                    <p:menuitem value="Empleado" url="../PersonaV/PersonaV.xhtml"/>
-                    <p:menuitem value="Producto" url="../ProductoV/ProductoV.xhtml"/>
-                    <p:menuitem value="Sucursal" url="../SucursalV/SucursalV.xhtml"/>
-                    <p:menuitem value="Asignacion de Sucursales" url="../AsignacionV/AsignaTempl.xhtml"/>
-                    <p:menuitem value="Venta" url="../VentaV/VentaV.xhtml"/>
-                </p:slideMenu>
+            <h:form>                
+                <p:tabMenu>
+                    <p:menuitem value="Empleado" outcome="/vista/PersonaV/PersonaV.xhtml"/>
+                    <p:menuitem value="Producto" outcome="/vista/ProductoV/ProductoV.xhtml"/>
+                    <p:menuitem value="Sucursal" outcome="/vista/SucursalV/SucursalV.xhtml"/>
+                    <p:menuitem value="Asignacion de Sucursales" outcome="/vista/AsignacionV/AsignaTempl.xhtml"/>
+                    <p:menuitem value="Venta" outcome="/vista/VentaV/VentaV.xhtml"/>
+                </p:tabMenu>
             </h:form>
         </div>
+        
         <div id="content" class="left_content">
             <ui:insert name="content"></ui:insert>
         </div>
-        
+
     </h:body>
 
 </html>
