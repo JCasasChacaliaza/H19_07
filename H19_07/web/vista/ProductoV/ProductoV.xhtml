@@ -16,6 +16,9 @@
             </ui:define>
 
             <ui:define name="content">
+                <h:form>
+                    <p:commandButton value="Salir" actionListener="#{loginCon.finishSession()}" />
+                </h:form>
                 <p:growl autoUpdate="true" showDetail="true"/>
                 <center><h1>Registro de Productos</h1>
                     <h:form id="formIns">

@@ -78,7 +78,7 @@ public class LoginC implements Serializable {
 
     public void finishSession() throws IOException {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear(); //Cierra la Session
-        FacesContext.getCurrentInstance().getExternalContext().redirect("/Edooca"); // Mandamos al Login
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/H19_07"); // Mandamos al Login
     }
 
     public boolean isAdmin() {

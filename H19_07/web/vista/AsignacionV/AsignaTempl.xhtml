@@ -1,105 +1,112 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 
-    <body>
+    <h:head>
 
-        <ui:composition template="./../Templete/plantila.xhtml">
+    </h:head>
 
-            <ui:define name="titlePage">
-                Asignacion de Personal
-            </ui:define>
+    <ui:define name="titlePage">
+        Asignacion de Personal
+    </ui:define>
 
-            <ui:define name="content">
-                <h:body>
-                    <p:growl autoUpdate="true" showDetail="true" />
-                    <h1>Asignacion de Personal </h1>
-                    <h:form id="formIns" >
-                        <p:panelGrid columns="2">                    
+    <h:body>
 
-                            <p:outputLabel value="Jefe de Area" for="cur"/>
-                            <p:autoComplete id="cur" dropdown="true" value="#{asignacionC.asignacion.autJef}" completeMethod="#{asignacionC.completeTextidJef}" required="true" requiredMessage="Ingresa al Jefe de la Sucursal"/>
+        <h:form>
+            <p:tabMenu>
+                <p:menuitem value="Empleado" outcome="/vista/PersonaV/PersonaV.xhtml"/>
+                <p:menuitem value="Asignacion de Sucursales" outcome="/vista/AsignacionV/AsignaTempl.xhtml"/>
+                <p:menuitem value="Sucursal" outcome="/vista/SucursalV/SucursalV.xhtml"/>
+            </p:tabMenu>
+        </h:form>  
 
-                            <p:outputLabel value="Vendedor" for="aul" />
-                            <p:autoComplete id="aul" dropdown="true" value="#{asignacionC.asignacion.autVen}" completeMethod="#{asignacionC.completeTextidVen}" required="true" requiredMessage="Ingresa al Vendedor"/>
+        <p:growl autoUpdate="true" showDetail="true" />
+        <h:form>
+            <p:commandButton value="Salir" actionListener="#{loginCon.finishSession()}" />
+        </h:form>
+        <h1>Asignacion de Personal </h1>
+        <h:form id="formIns" >
+            <p:panelGrid columns="2">                    
 
-                            <p:outputLabel value="Sucursal" for="aula"/>
-                            <p:autoComplete id="aula" dropdown="true" value="#{asignacionC.asignacion.autSuc}" completeMethod="#{asignacionC.completeTextidSuc}" required="true" requiredMessage="Ingresa la sucursal"/>
+                <p:outputLabel value="Jefe de Area" for="cur"/>
+                <p:autoComplete id="cur" dropdown="true" value="#{asignacionC.asignacion.autJef}" completeMethod="#{asignacionC.completeTextidJef}" required="true" requiredMessage="Ingresa al Jefe de la Sucursal"/>
 
-                            <p:outputLabel value="Grupo"/>
-                            <p:inputText value="#{asignacionC.asignacion.gruAsi}"  maxlength="1"  required="true" requiredMessage="Ingresa el Grupo" />
+                <p:outputLabel value="Vendedor" for="aul" />
+                <p:autoComplete id="aul" dropdown="true" value="#{asignacionC.asignacion.autVen}" completeMethod="#{asignacionC.completeTextidVen}" required="true" requiredMessage="Ingresa al Vendedor"/>
 
-                        </p:panelGrid>
-                        <p:commandButton value="Registrar" update="formIns :form" actionListener="#{asignacionC.registrar()}" />                            
-                    </h:form>
+                <p:outputLabel value="Sucursal" for="aula"/>
+                <p:autoComplete id="aula" dropdown="true" value="#{asignacionC.asignacion.autSuc}" completeMethod="#{asignacionC.completeTextidSuc}" required="true" requiredMessage="Ingresa la sucursal"/>
 
-                    <h:form id="form">
-                        <p:dataTable value="#{asignacionC.lisAsig}" 
-                                     id="dtTable" var="lista" 
-                                     selection="#{asignacionC.asignacion}"
-                                     rowKey="#{lista.idAsi}"  paginator="true"
-                                     selectionMode="single" rows="15" style="border-bottom: 25px">
+                <p:outputLabel value="Grupo"/>
+                <p:inputText value="#{asignacionC.asignacion.gruAsi}"  maxlength="1"  required="true" requiredMessage="Ingresa el Grupo" />
 
-                            <p:column headerText="Jefe">
-                                <p:outputLabel value="#{lista.autJef}"/>
-                            </p:column>
+            </p:panelGrid>
+            <p:commandButton value="Registrar" update="formIns :form" actionListener="#{asignacionC.registrar()}" />                            
+        </h:form>
 
-                            <p:column headerText="Venta">
-                                <p:outputLabel value="#{lista.autVen}"/>
-                            </p:column>
+        <h:form id="form">
+            <p:dataTable value="#{asignacionC.lisAsig}" 
+                         id="dtTable" var="lista" 
+                         selection="#{asignacionC.asignacion}"
+                         rowKey="#{lista.idAsi}"  paginator="true"
+                         selectionMode="single" rows="15" style="border-bottom: 25px">
 
-                            <p:column headerText="Sucursal">
-                                <p:outputLabel value="#{lista.autSuc}"/>
-                            </p:column>
+                <p:column headerText="Jefe">
+                    <p:outputLabel value="#{lista.autJef}"/>
+                </p:column>
 
-                            <p:column headerText="Grupo">
-                                <p:outputLabel value="#{lista.gruAsi}"/>
-                            </p:column>
+                <p:column headerText="Venta">
+                    <p:outputLabel value="#{lista.autVen}"/>
+                </p:column>
 
-                            <p:column>
-                                <p:commandButton value="Modificar" update=":dlgDatos" actionListener="#{asignacionC.leerAsi(lista.idAsi)}" oncomplete="PF('wdlgDatos').show();" /> 
-                                <p:commandButton value="Eliminar" update="dtTable"  actionListener="#{asignacionC.eliminar(lista)}"/>
-                            </p:column>
+                <p:column headerText="Sucursal">
+                    <p:outputLabel value="#{lista.autSuc}"/>
+                </p:column>
 
+                <p:column headerText="Grupo">
+                    <p:outputLabel value="#{lista.gruAsi}"/>
+                </p:column>
 
-                        </p:dataTable>
-
-
-                    </h:form>
-
-                    <p:dialog id="dlgDatos" widgetVar="wdlgDatos">
-                        <h:form>
-                            <h:panelGrid columns="4">
-
-                                <p:outputLabel value="Jefe de Area" for="cur"/>
-                                <p:autoComplete id="cur" dropdown="true" value="#{asignacionC.asignacion.autJef}" completeMethod="#{asignacionC.completeTextidJef}" required="true" requiredMessage="Ingresa al Jefe de la Sucursal"/>
-
-                                <p:outputLabel value="Vendedor" for="aul" />
-                                <p:autoComplete id="aul" dropdown="true" value="#{asignacionC.asignacion.autVen}" completeMethod="#{asignacionC.completeTextidVen}" required="true" requiredMessage="Ingresa al Vendedor"/>
-
-                                <p:outputLabel value="Sucursal" for="aula"/>
-                                <p:autoComplete id="aula" dropdown="true" value="#{asignacionC.asignacion.autSuc}" completeMethod="#{asignacionC.completeTextidSuc}" required="true" requiredMessage="Ingresa la sucursal"/>
-
-                                <p:outputLabel value="Grupo"/>
-                                <p:inputText value="#{asignacionC.asignacion.gruAsi}"  maxlength="1"  required="true" requiredMessage="Ingresa el Grupo" />
+                <p:column>
+                    <p:commandButton value="Modificar" update=":dlgDatos" actionListener="#{asignacionC.leerAsi(lista.idAsi)}" oncomplete="PF('wdlgDatos').show();" /> 
+                    <p:commandButton value="Eliminar" update="dtTable"  actionListener="#{asignacionC.eliminar(lista)}"/>
+                </p:column>
 
 
-                            </h:panelGrid>     
-                            <p:commandButton value="Modificar" actionListener="#{asignacionC.modificar()}" update=":form" oncomplete="PF('wdlgDatos').hide(); " />
-                            <p:commandButton value="Cancelar" immediate="true" oncomplete="PF('wdlgDatos').hide();" />
-
-                        </h:form>
+            </p:dataTable>
 
 
-                    </p:dialog>
-                </h:body>
-            </ui:define>
+        </h:form>
 
-        </ui:composition>
+        <p:dialog id="dlgDatos" widgetVar="wdlgDatos">
+            <h:form>
+                <h:panelGrid columns="4">
 
-    </body>
+                    <p:outputLabel value="Jefe de Area" for="cur"/>
+                    <p:autoComplete id="cur" dropdown="true" value="#{asignacionC.asignacion.autJef}" completeMethod="#{asignacionC.completeTextidJef}" required="true" requiredMessage="Ingresa al Jefe de la Sucursal"/>
+
+                    <p:outputLabel value="Vendedor" for="aul" />
+                    <p:autoComplete id="aul" dropdown="true" value="#{asignacionC.asignacion.autVen}" completeMethod="#{asignacionC.completeTextidVen}" required="true" requiredMessage="Ingresa al Vendedor"/>
+
+                    <p:outputLabel value="Sucursal" for="aula"/>
+                    <p:autoComplete id="aula" dropdown="true" value="#{asignacionC.asignacion.autSuc}" completeMethod="#{asignacionC.completeTextidSuc}" required="true" requiredMessage="Ingresa la sucursal"/>
+
+                    <p:outputLabel value="Grupo"/>
+                    <p:inputText value="#{asignacionC.asignacion.gruAsi}"  maxlength="1"  required="true" requiredMessage="Ingresa el Grupo" />
+
+
+                </h:panelGrid>     
+                <p:commandButton value="Modificar" actionListener="#{asignacionC.modificar()}" update=":form" oncomplete="PF('wdlgDatos').hide(); " />
+                <p:commandButton value="Cancelar" immediate="true" oncomplete="PF('wdlgDatos').hide();" />
+
+            </h:form>
+
+
+        </p:dialog>
+    </h:body>
+
+
 </html>

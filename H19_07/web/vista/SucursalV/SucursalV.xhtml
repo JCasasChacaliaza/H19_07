@@ -9,78 +9,86 @@
     </h:head>
 
     <h:body>
-        <ui:composition template="./../Templete/plantila.xhtml">
-
-            <ui:define name="titlePage">
-                Sucursales
-            </ui:define>
-
-            <ui:define name="content">
-                <p:growl autoUpdate="true"  />
-                <h1>Registro de Sucursales</h1>
-                <h:form id="formIns">
-                    <p:panelGrid columns="2" >
-
-                        <p:outputLabel value="Telefono"/>
-                        <p:inputText value="#{sucursalC.sucursal.telSuc}" maxlength="8" required="true" requiredMessage="Ingrese el Telefono">
-                            <p:keyFilter regEx="/[0-9]/"/>
-                        </p:inputText>
-
-                        <p:outputLabel value="Direción"/>
-                        <p:inputText value="#{sucursalC.sucursal.dirSuc}" required="true" maxlength="50" requiredMessage="Ingrese ladirecció"/>
-
-                        <p:outputLabel value="Ubicación"/>
-                        <p:inputText value="#{sucursalC.sucursal.proSuc}" required="true" maxlength="50" requiredMessage="Ingrese la ubicación"/>
-
-                    </p:panelGrid>     
-                    <p:commandButton value="Registrar" actionListener="#{sucursalC.registrar()}" update="formIns :form" />            
-                </h:form>  
-
-                <h:form id="form" >
-                    <p:dataTable value="#{sucursalC.lisSuc}" var="lista"
-                                 rowKey="#{lista.idSuc}" selection="#{sucursalC.sucursal}"
-                                 selectionMode="single"  id="dtTable">
-
-                        <p:column headerText="Telefono" >
-                            <p:outputLabel value="#{lista.telSuc}"  />                                        
-                        </p:column>
-
-                        <p:column headerText="Direccion" >
-                            <p:outputLabel value="#{lista.dirSuc}"  />                                        
-                        </p:column>
-                        <p:column headerText="Lugar del Local" >
-                            <p:outputLabel value="#{lista.proSuc}"  />                                        
-                        </p:column>                                
-                    </p:dataTable>
-                    <p:contextMenu for="dtTable">
-                        <p:menuitem value="Modificar" update=":dlgDatos" oncomplete="PF('wdlgDatos').show();" />
-                        <p:menuitem value="Eliminar" update="dtTable" actionListener="#{sucursalC.eliminar()}"/>
-                    </p:contextMenu>            
-                </h:form>
 
 
-                <p:dialog id="dlgDatos" widgetVar="wdlgDatos" >
-                    <h:form>
-                        <p:panelGrid columns="2" >
+        <ui:define name="titlePage">
+            Sucursales
+        </ui:define>
+        <h:form>
+            <p:tabMenu>
+                <p:menuitem value="Empleado" outcome="/vista/PersonaV/PersonaV.xhtml"/>
+                <p:menuitem value="Asignacion de Sucursales" outcome="/vista/AsignacionV/AsignaTempl.xhtml"/>
+                <p:menuitem value="Sucursal" outcome="/vista/SucursalV/SucursalV.xhtml"/>
+            </p:tabMenu>
+        </h:form>  
+        <h:form>
+            <p:commandButton value="Salir" actionListener="#{loginCon.finishSession()}" />
+        </h:form>
+        <p:growl autoUpdate="true"  />
+        <h1>Registro de Sucursales</h1>
+        <h:form id="formIns">
+            <p:panelGrid columns="2" >
 
-                            <p:outputLabel value="Telefono"/>
-                            <p:inputText value="#{sucursalC.sucursal.telSuc}" maxlength="8" required="true" requiredMessage="Ingrese el Telefono">
-                                <p:keyFilter regEx="/[0-9]/"/>
-                            </p:inputText>
+                <p:outputLabel value="Telefono"/>
+                <p:inputText value="#{sucursalC.sucursal.telSuc}" maxlength="8" required="true" requiredMessage="Ingrese el Telefono">
+                    <p:keyFilter regEx="/[0-9]/"/>
+                </p:inputText>
 
-                            <p:outputLabel value="Direción"/>
-                            <p:inputText value="#{sucursalC.sucursal.dirSuc}" maxlength="50" required="true" requiredMessage="Ingrese ladirecció"/>
+                <p:outputLabel value="Direción"/>
+                <p:inputText value="#{sucursalC.sucursal.dirSuc}" required="true" maxlength="50" requiredMessage="Ingrese ladirecció"/>
 
-                            <p:outputLabel value="Ubicación"/>
-                            <p:inputText value="#{sucursalC.sucursal.proSuc}" required="true" maxlength="50" requiredMessage="Ingrese la ubicación"/>
-                        </p:panelGrid>     
-                        <p:commandButton value="Modificar" actionListener="#{sucursalC.modificar()}" update=":form" oncomplete="PF('wdlgDatos').hide();" />    
-                        <p:commandButton value="Cancelar" immediate="true" oncomplete="PF('wdlgDatos').hide();" />    
+                <p:outputLabel value="Ubicación"/>
+                <p:inputText value="#{sucursalC.sucursal.proSuc}" required="true" maxlength="50" requiredMessage="Ingrese la ubicación"/>
 
-                    </h:form>
-                </p:dialog> 
-            </ui:define>
+            </p:panelGrid>     
+            <p:commandButton value="Registrar" actionListener="#{sucursalC.registrar()}" update="formIns :form" />            
+        </h:form>  
 
-        </ui:composition>
+        <h:form id="form" >
+            <p:dataTable value="#{sucursalC.lisSuc}" var="lista"
+                         rowKey="#{lista.idSuc}" selection="#{sucursalC.sucursal}"
+                         selectionMode="single"  id="dtTable">
+
+                <p:column headerText="Telefono" >
+                    <p:outputLabel value="#{lista.telSuc}"  />                                        
+                </p:column>
+
+                <p:column headerText="Direccion" >
+                    <p:outputLabel value="#{lista.dirSuc}"  />                                        
+                </p:column>
+                <p:column headerText="Lugar del Local" >
+                    <p:outputLabel value="#{lista.proSuc}"  />                                        
+                </p:column>                                
+            </p:dataTable>
+            <p:contextMenu for="dtTable">
+                <p:menuitem value="Modificar" update=":dlgDatos" oncomplete="PF('wdlgDatos').show();" />
+                <p:menuitem value="Eliminar" update="dtTable" actionListener="#{sucursalC.eliminar()}"/>
+            </p:contextMenu>            
+        </h:form>
+
+
+        <p:dialog id="dlgDatos" widgetVar="wdlgDatos" >
+            <h:form>
+                <p:panelGrid columns="2" >
+
+                    <p:outputLabel value="Telefono"/>
+                    <p:inputText value="#{sucursalC.sucursal.telSuc}" maxlength="8" required="true" requiredMessage="Ingrese el Telefono">
+                        <p:keyFilter regEx="/[0-9]/"/>
+                    </p:inputText>
+
+                    <p:outputLabel value="Direción"/>
+                    <p:inputText value="#{sucursalC.sucursal.dirSuc}" maxlength="50" required="true" requiredMessage="Ingrese ladirecció"/>
+
+                    <p:outputLabel value="Ubicación"/>
+                    <p:inputText value="#{sucursalC.sucursal.proSuc}" required="true" maxlength="50" requiredMessage="Ingrese la ubicación"/>
+                </p:panelGrid>     
+                <p:commandButton value="Modificar" actionListener="#{sucursalC.modificar()}" update=":form" oncomplete="PF('wdlgDatos').hide();" />    
+                <p:commandButton value="Cancelar" immediate="true" oncomplete="PF('wdlgDatos').hide();" />    
+
+            </h:form>
+        </p:dialog> 
+
+
+
     </h:body>
 </html>

@@ -10,145 +10,153 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
-        <ui:composition template="./../Templete/plantila.xhtml">
-            <ui:define name="titlePage">
-                Registro de Personal
-            </ui:define>
 
+        <ui:define name="titlePage">
+            Registro de Personal
+        </ui:define>
+        <h:form>
+            <p:tabMenu>
+                <p:menuitem value="Empleado" outcome="/vista/PersonaV/PersonaV.xhtml"/>
+                <p:menuitem value="Asignacion de Sucursales" outcome="/vista/AsignacionV/AsignaTempl.xhtml"/>
+                <p:menuitem value="Sucursal" outcome="/vista/SucursalV/SucursalV.xhtml"/>
+            </p:tabMenu>
+        </h:form>  
 
-            <ui:define name="content">
-                <p:growl autoUpdate="true"  showDetail="true"/>
-                <center>
-                    <h1>Formulario de Persona</h1>
-                    <h:form id="formIns">
-                        <h:panelGrid columns="4">
-                            <p:outputLabel value="Nombre"/>
-                            <p:inputText value="#{personaC.persona.nomPer}" maxlength="50" required="true" requiredMessage="Ingrese el nombre"/>
-                            <p:outputLabel value="Apellido"/>
-                            <p:inputText value="#{personaC.persona.apePer}" maxlength="50" required="true" requiredMessage="Ingrese el apellido"/>
-                            <p:outputLabel value="DNI"/>                    
-                            <p:inputText value="#{personaC.persona.dniPer}" maxlength="8" required="true" requiredMessage="Ingrese el dni">
-                                <p:keyFilter regEx="/[0-9]/"/>
-                            </p:inputText>
+        <p:growl autoUpdate="true"  showDetail="true"/>
+        <h:form>
+            <p:commandButton value="Salir" actionListener="#{loginCon.finishSession()}" />
+        </h:form>
+        <center>
+            <h1>Formulario de Persona</h1>
+            <h:form id="formIns">
+                <h:panelGrid columns="4">
+                    <p:outputLabel value="Nombre"/>
+                    <p:inputText value="#{personaC.persona.nomPer}" maxlength="50" required="true" requiredMessage="Ingrese el nombre"/>
+                    <p:outputLabel value="Apellido"/>
+                    <p:inputText value="#{personaC.persona.apePer}" maxlength="50" required="true" requiredMessage="Ingrese el apellido"/>
+                    <p:outputLabel value="DNI"/>                    
+                    <p:inputText value="#{personaC.persona.dniPer}" maxlength="8" required="true" requiredMessage="Ingrese el dni">
+                        <p:keyFilter regEx="/[0-9]/"/>
+                    </p:inputText>
 
-                            <p:outputLabel value="Celular"/>                    
-                            <p:inputText value="#{personaC.persona.celPer}" maxlength="9" required="true" requiredMessage="Ingrese el dni">
-                                <p:keyFilter regEx="/[0-9]/"/>
-                            </p:inputText>
-                            <p:outputLabel value="Contraseña"/>
-                            <p:inputText value="#{personaC.persona.pasPer}" required="true" requiredMessage="Ingrese el dni"/>
-                            <p:outputLabel value="Usuario"/>
-                            <p:inputText value="#{personaC.persona.usuPer}" required="true" requiredMessage="Ingrese el dni"/>
-                            <p:outputLabel value="Tipo de usuario"/>
-                            <p:selectOneMenu value="#{personaC.persona.tipPer}" required="true" requiredMessage="Ingresa el nivel">
-                                <f:selectItem itemLabel="Registra un Nivel" noSelectionOption="false"/>
-                                <f:selectItem itemLabel="Administrador" itemValue="1"/>
-                                <f:selectItem itemLabel="Jefe de Sucursal" itemValue="2"/>
-                                <f:selectItem itemLabel="Vendedor" itemValue="3"/>                                                                
-                            </p:selectOneMenu>
-                            <p:outputLabel value="Genero"/>
-                            <p:selectOneRadio value="#{personaC.persona.sexPer}" required="true" requiredMessage="Ingresa el genero">
-                                <f:selectItem itemLabel="Masculino" itemValue="M"/>
-                                <f:selectItem itemLabel="Femenino" itemValue="F"/>                                                                                  
-                            </p:selectOneRadio>
-                        </h:panelGrid>     
-                        <br/>
-                        <p:commandButton value="Registra xD" actionListener="#{personaC.registrar()}"  update="formIns :form"/>
-                    </h:form>
-                </center> 
+                    <p:outputLabel value="Celular"/>                    
+                    <p:inputText value="#{personaC.persona.celPer}" maxlength="9" required="true" requiredMessage="Ingrese el dni">
+                        <p:keyFilter regEx="/[0-9]/"/>
+                    </p:inputText>
+                    <p:outputLabel value="Contraseña"/>
+                    <p:inputText value="#{personaC.persona.pasPer}" required="true" requiredMessage="Ingrese el dni"/>
+                    <p:outputLabel value="Usuario"/>
+                    <p:inputText value="#{personaC.persona.usuPer}" required="true" requiredMessage="Ingrese el dni"/>
+                    <p:outputLabel value="Tipo de usuario"/>
+                    <p:selectOneMenu value="#{personaC.persona.tipPer}" required="true" requiredMessage="Ingresa el nivel">
+                        <f:selectItem itemLabel="Registra un Nivel" noSelectionOption="false"/>
+                        <f:selectItem itemLabel="Administrador" itemValue="1"/>
+                        <f:selectItem itemLabel="Jefe de Sucursal" itemValue="2"/>
+                        <f:selectItem itemLabel="Vendedor" itemValue="3"/>                                                                
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Genero"/>
+                    <p:selectOneRadio value="#{personaC.persona.sexPer}" required="true" requiredMessage="Ingresa el genero">
+                        <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                        <f:selectItem itemLabel="Femenino" itemValue="F"/>                                                                                  
+                    </p:selectOneRadio>
+                </h:panelGrid>     
                 <br/>
-                <h:form id="form">
-                    <p:dataTable value="#{personaC.lisper}" 
-                                 id="dtTable" var="lista" 
-                                 selection="#{personaC.persona}"
-                                 rowKey="#{lista.idPer}"  paginator="true"
-                                 selectionMode="single" rows="15" style="border-bottom: 25px">
+                <p:commandButton value="Registra xD" actionListener="#{personaC.registrar()}"  update="formIns :form"/>
+            </h:form>
+        </center> 
+        <br/>
+        <h:form id="form">
+            <p:dataTable value="#{personaC.lisper}" 
+                         id="dtTable" var="lista" 
+                         selection="#{personaC.persona}"
+                         rowKey="#{lista.idPer}"  paginator="true"
+                         selectionMode="single" rows="15" style="border-bottom: 25px">
 
-                        <p:column headerText="Nombre">
-                            <p:outputLabel value="#{lista.nomPer}"/>
-                        </p:column>
+                <p:column headerText="Nombre">
+                    <p:outputLabel value="#{lista.nomPer}"/>
+                </p:column>
 
-                        <p:column headerText="Apellido">
-                            <p:outputLabel value="#{lista.apePer}"/>
-                        </p:column>
+                <p:column headerText="Apellido">
+                    <p:outputLabel value="#{lista.apePer}"/>
+                </p:column>
 
-                        <p:column headerText="Celular">
-                            <p:outputLabel value="#{lista.celPer}"/>
-                        </p:column>
+                <p:column headerText="Celular">
+                    <p:outputLabel value="#{lista.celPer}"/>
+                </p:column>
 
-                        <p:column headerText="DNI">
-                            <p:outputLabel value="#{lista.dniPer}"/>
-                        </p:column>
+                <p:column headerText="DNI">
+                    <p:outputLabel value="#{lista.dniPer}"/>
+                </p:column>
 
-                        <p:column headerText="Contraseña">
-                            <p:outputLabel value="#{lista.pasPer}"/>
+                <p:column headerText="Contraseña">
+                    <p:outputLabel value="#{lista.pasPer}"/>
 
-                        </p:column>
+                </p:column>
 
-                        <p:column headerText="Usuario">
-                            <p:outputLabel value="#{lista.usuPer}"/>
-                        </p:column>
-
-
-                        <p:column headerText="Genero">
-                            <p:outputLabel value="#{lista.sexPer eq 'M' ? 'Masculino' : ''}"/>
-                            <p:outputLabel value="#{lista.sexPer eq 'F' ? 'Femenino' : ''}"/>
-                        </p:column>
-
-                        <p:column headerText="Nivel Usuario">
-                            <p:outputLabel value="#{lista.tipPer eq '1' ? 'Administrador' : ''}" />
-                            <p:outputLabel value="#{lista.tipPer eq '2' ? 'Jefe de Sucursal' : ''}" />
-                            <p:outputLabel value="#{lista.tipPer eq '3' ? 'Vendedor' : ''}" />
-                        </p:column>
+                <p:column headerText="Usuario">
+                    <p:outputLabel value="#{lista.usuPer}"/>
+                </p:column>
 
 
-                    </p:dataTable>
+                <p:column headerText="Genero">
+                    <p:outputLabel value="#{lista.sexPer eq 'M' ? 'Masculino' : ''}"/>
+                    <p:outputLabel value="#{lista.sexPer eq 'F' ? 'Femenino' : ''}"/>
+                </p:column>
 
-                    <p:contextMenu for="dtTable">
-                        <p:menuitem value="Modificar" update=":dlgDatos" oncomplete="PF('wdlgDatos').show();"/>
-                        <p:menuitem value="Eliminar" update="dtTable"  actionListener="#{personaC.eliminado()}"/>                
-                    </p:contextMenu>  
-                </h:form>
-
-                <p:dialog id="dlgDatos" widgetVar="wdlgDatos">
-                    <h:form>
-                        <h:panelGrid columns="4">
-                            <p:outputLabel value="Nombre"/>
-                            <p:inputText value="#{personaC.persona.nomPer}" maxlength="50" required="true" requiredMessage="Ingrese el nombre"/>
-                            <p:outputLabel value="Apellido"/>
-                            <p:inputText value="#{personaC.persona.apePer}" maxlength="50" required="true" requiredMessage="Ingrese el apellido"/>
-                            <p:outputLabel value="DNI"/>
-                            <p:inputText value="#{personaC.persona.dniPer}" maxlength="8" required="true" requiredMessage="Ingrese el dni"/>
-                            <p:outputLabel value="Celular"/>
-                            <p:inputText value="#{personaC.persona.celPer}" maxlength="9" required="true" requiredMessage="Ingrese el Celular"/>
-                            <p:outputLabel value="Contraseña"/>
-                            <p:inputText value="#{personaC.persona.pasPer}" required="true" requiredMessage="Ingrese el constraseña"/>
-                            <p:outputLabel value="Usuario"/>
-                            <p:inputText value="#{personaC.persona.usuPer}" required="true" requiredMessage="Ingrese el usuario"/>
-                            <p:outputLabel value="Tipo de usuario"/>
-                            <p:selectOneMenu value="#{personaC.persona.tipPer}" required="true" requiredMessage="Ingresa el nivel">
-                                <f:selectItem itemLabel="Registra un Nivel" itemValue=""/>
-                                <f:selectItem itemLabel="Administrador" itemValue="1"/>
-                                <f:selectItem itemLabel="Jefe de Sucursal" itemValue="2"/>
-                                <f:selectItem itemLabel="Vendedor" itemValue="3"/>                                                                
-                            </p:selectOneMenu>
-                            <p:outputLabel value="Genero"/>
-                            <p:selectOneRadio value="#{personaC.persona.sexPer}" required="true" requiredMessage="Ingresa el genero">
-                                <f:selectItem itemLabel="Masculino" itemValue="M"/>
-                                <f:selectItem itemLabel="Femenino" itemValue="F"/>                                                                                  
-                            </p:selectOneRadio>
-                        </h:panelGrid>     
-                        <p:commandButton value="Modificar" actionListener="#{personaC.modificar()}" update=":form" oncomplete="PF('wdlgDatos').hide(); " />
-                        <p:commandButton value="Cancelar" immediate="true" oncomplete="PF('wdlgDatos').hide();" />
-
-                    </h:form>
+                <p:column headerText="Nivel Usuario">
+                    <p:outputLabel value="#{lista.tipPer eq '1' ? 'Administrador' : ''}" />
+                    <p:outputLabel value="#{lista.tipPer eq '2' ? 'Jefe de Sucursal' : ''}" />
+                    <p:outputLabel value="#{lista.tipPer eq '3' ? 'Vendedor' : ''}" />
+                </p:column>
 
 
-                </p:dialog>
+            </p:dataTable>
 
-            </ui:define>
+            <p:contextMenu for="dtTable">
+                <p:menuitem value="Modificar" update=":dlgDatos" oncomplete="PF('wdlgDatos').show();"/>
+                <p:menuitem value="Eliminar" update="dtTable"  actionListener="#{personaC.eliminado()}"/>                
+            </p:contextMenu>  
+        </h:form>
 
-        </ui:composition>
+        <p:dialog id="dlgDatos" widgetVar="wdlgDatos">
+            <h:form>
+                <h:panelGrid columns="4">
+                    <p:outputLabel value="Nombre"/>
+                    <p:inputText value="#{personaC.persona.nomPer}" maxlength="50" required="true" requiredMessage="Ingrese el nombre"/>
+                    <p:outputLabel value="Apellido"/>
+                    <p:inputText value="#{personaC.persona.apePer}" maxlength="50" required="true" requiredMessage="Ingrese el apellido"/>
+                    <p:outputLabel value="DNI"/>
+                    <p:inputText value="#{personaC.persona.dniPer}" maxlength="8" required="true" requiredMessage="Ingrese el dni"/>
+                    <p:outputLabel value="Celular"/>
+                    <p:inputText value="#{personaC.persona.celPer}" maxlength="9" required="true" requiredMessage="Ingrese el Celular"/>
+                    <p:outputLabel value="Contraseña"/>
+                    <p:inputText value="#{personaC.persona.pasPer}" required="true" requiredMessage="Ingrese el constraseña"/>
+                    <p:outputLabel value="Usuario"/>
+                    <p:inputText value="#{personaC.persona.usuPer}" required="true" requiredMessage="Ingrese el usuario"/>
+                    <p:outputLabel value="Tipo de usuario"/>
+                    <p:selectOneMenu value="#{personaC.persona.tipPer}" required="true" requiredMessage="Ingresa el nivel">
+                        <f:selectItem itemLabel="Registra un Nivel" itemValue=""/>
+                        <f:selectItem itemLabel="Administrador" itemValue="1"/>
+                        <f:selectItem itemLabel="Jefe de Sucursal" itemValue="2"/>
+                        <f:selectItem itemLabel="Vendedor" itemValue="3"/>                                                                
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Genero"/>
+                    <p:selectOneRadio value="#{personaC.persona.sexPer}" required="true" requiredMessage="Ingresa el genero">
+                        <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                        <f:selectItem itemLabel="Femenino" itemValue="F"/>                                                                                  
+                    </p:selectOneRadio>
+                </h:panelGrid>     
+                <p:commandButton value="Modificar" actionListener="#{personaC.modificar()}" update=":form" oncomplete="PF('wdlgDatos').hide(); " />
+                <p:commandButton value="Cancelar" immediate="true" oncomplete="PF('wdlgDatos').hide();" />
+
+            </h:form>
+
+
+        </p:dialog>
+
+
+
+
 
     </h:body>
 </html>
